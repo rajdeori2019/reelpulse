@@ -37,6 +37,16 @@
           border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;
           margin:0 0 28px;font-size:14px}
   .notice strong{display:block;margin-bottom:4px}
+  .verdict{border:1px solid var(--line);border-left:3px solid var(--warn);
+           background:var(--chip);border-radius:8px;padding:14px 16px;margin:0 0 20px;
+           font-size:14px}
+  .verdict.bad{border-left-color:#b4472e;background:var(--accent-soft)}
+  .verdict strong{display:block;margin-bottom:4px;font-size:15px}
+  .reach{font-family:var(--mono);font-size:11.5px;padding:1px 7px;border-radius:99px;
+         border:1px solid var(--line);color:var(--muted)}
+  .reach.viral{background:var(--good);color:#fff;border-color:transparent}
+  .reach.strong{background:var(--warn);color:#fff;border-color:transparent}
+  .reach.negligible{color:#b4472e}
 
   h2{font-size:19px;margin:38px 0 14px;letter-spacing:-.01em;
      display:flex;align-items:baseline;gap:10px}
@@ -110,6 +120,7 @@
   </header>
 
   <div class="notice" id="method"></div>
+  <div id="verdict"></div>
 
   <h2>The board <span class="hint" id="boardhint"></span></h2>
   <div id="board"></div>
@@ -155,6 +166,17 @@ function render(d){
   document.getElementById("boardhint").textContent =
     `top ${(d.top||[]).length} by Viral Velocity Score`;
 
+  // Rank is relative; reach is absolute. Showing rank alone makes a quiet
+  // niche look like a set of hits — so the verdict sits ABOVE the board.
+  const rv = d.reach || {};
+  const vEl = document.getElementById("verdict");
+  if (rv.headline) {
+    const bad = rv.verdict === "nothing_viral";
+    vEl.className = "verdict" + (bad ? " bad" : "");
+    vEl.innerHTML = (bad ? "<strong>Nothing here went viral</strong>" : "<strong>Reach check</strong>")
+      + esc(rv.headline.replace(/\*\*/g, ""));
+  } else { vEl.innerHTML = ""; }
+
   document.getElementById("board").innerHTML = (d.top||[]).map(r => {
     const parts = Object.entries(r.score_breakdown||{})
       .filter(([k,v]) => !k.startsWith("_") && v > 0)
@@ -168,6 +190,7 @@ function render(d){
       r.instagram_native ? `<span class="chip ig">Instagram-native</span>` : "",
       r.tags?.primary_hook && r.tags.primary_hook !== "none_detected"
         ? `<span class="chip hi">hook: ${esc(r.tags.primary_hook.replace(/_/g," "))}</span>` : "",
+      r.reach_tier ? `<span class="reach ${esc(r.reach_tier)}">reach: ${esc(r.reach_tier)}${r.reach_percentile!=null?" \u00b7 "+(r.reach_percentile>=50?"top "+Math.round(100-r.reach_percentile):"bottom "+Math.max(Math.round(r.reach_percentile),1))+"%":""}</span>` : "",
       r.tags?.topic ? `<span class="chip">${esc(r.tags.topic)}</span>` : "",
       r.duration_s ? `<span class="chip">${Math.round(r.duration_s)}s</span>` : "",
       `<span class="chip">${esc((r.platforms||[]).join(" + "))}</span>`,

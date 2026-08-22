@@ -200,3 +200,60 @@ def test_anchoring_preserves_a_genuine_smash():
     clusters = cluster_candidates(keyword_hits + background)
     ranked = score_clusters(clusters, _no_history)
     assert ranked[0].primary.platform_id == "k0"
+
+
+# ---- reach: is a #1 actually big? -----------------------------------------
+
+def test_a_quiet_niche_is_called_out():
+    """The failure this module exists for: 75 results, best of them tiny, and
+    the tool presented it as a leaderboard with a 2-view clip at #3."""
+    from reelpulse.core.reach import assess
+
+    background = [float(v) for v in range(50_000, 5_000_000, 50_000)]
+    tiny = [34_133.0, 1_513.0, 2.0, 574.0, 337.0]
+
+    result = assess(tiny, background)
+    assert result["verdict"] == "nothing_viral"
+    assert "Nothing matching this search went meaningfully viral" in result["headline"]
+
+
+def test_a_genuine_hit_passes():
+    from reelpulse.core.reach import assess
+
+    background = [float(v) for v in range(50_000, 5_000_000, 50_000)]
+    result = assess([12_000_000.0, 400_000.0], background)
+    assert result["verdict"] == "ok"
+    assert result["best_tier"] == "viral"
+
+
+def test_absolute_floor_overrides_a_flattering_percentile():
+    """In a pool of uniformly tiny clips, a slightly less tiny clip sits at the
+    99th percentile. It is still not viral."""
+    from reelpulse.core.reach import tier_for
+
+    background = [float(v) for v in range(1, 400)]
+    label, pct = tier_for(450.0, background)
+    assert pct > 0.95
+    assert label == "negligible"
+
+
+def test_unanchored_says_so_rather_than_guessing():
+    from reelpulse.core.reach import assess
+
+    result = assess([9_000_000.0], [])
+    assert result["anchored"] is False
+    assert result["verdict"] == "unrated"
+    assert "No stored history" in result["headline"]
+
+
+def test_unanchored_still_catches_obviously_tiny_results():
+    from reelpulse.core.reach import assess
+
+    result = assess([2.0, 337.0], [])
+    assert result["verdict"] == "nothing_viral"
+    assert "not a leaderboard of hits" in result["headline"]
+
+
+def test_empty_result_set():
+    from reelpulse.core.reach import assess
+    assert assess([], [1.0, 2.0])["verdict"] == "empty"

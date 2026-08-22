@@ -8,6 +8,7 @@ from typing import Any
 
 from ..models import Cluster
 from .patterns import confidence_label, summarise_rule
+from .reach import assess, tier_for
 from .score import explain
 
 
@@ -33,6 +34,11 @@ def cluster_payload(cluster: Cluster) -> dict[str, Any]:
         # "3.4M views" and "900k likes, no published view count" are different
         # claims and the reader is entitled to know which one they are reading.
         "measurement_basis": cluster.features.get("measurement_basis", "none"),
+        # Absolute reach, not rank. A #1 in a quiet niche is still a #1; this
+        # says whether it is also big. Set by build_report when a background
+        # pool is available.
+        "reach_tier": cluster.tags.get("reach_tier"),
+        "reach_percentile": cluster.tags.get("reach_percentile"),
         "instagram_native": any(m.meta.get("instagram_native")
                                 for m in cluster.members),
         "discovered_via": next((m.meta.get("discovered_via")
@@ -61,8 +67,19 @@ def cluster_payload(cluster: Cluster) -> dict[str, Any]:
 def build_report(clusters: list[Cluster], rules: list[dict],
                  *, top_n: int = 10, benchmark: dict | None = None,
                  recommendations: list[dict] | None = None,
-                 stats: dict | None = None) -> dict[str, Any]:
+                 stats: dict | None = None,
+                 background_scales: list[float] | None = None) -> dict[str, Any]:
     top = clusters[:top_n]
+
+    # Reach assessment. Without it a ranking of tiny clips is indistinguishable
+    # from a ranking of hits — the failure that prompted this whole module.
+    background = background_scales or []
+    for cluster in top:
+        label, pct = tier_for(cluster.features.get("scale", 0.0), background)
+        cluster.tags["reach_tier"] = label
+        cluster.tags["reach_percentile"] = (round(pct * 100, 1) if pct is not None
+                                            else None)
+    reach = assess([c.features.get("scale", 0.0) for c in top], background)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "week": week_key(),
@@ -85,6 +102,7 @@ def build_report(clusters: list[Cluster], rules: list[dict],
                         "Wikimedia Pageviews API"],
         },
         "stats": stats or {},
+        "reach": reach,
         "top": [cluster_payload(c) for c in top],
         "patterns": [
             {

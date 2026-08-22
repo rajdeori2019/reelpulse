@@ -614,7 +614,14 @@ def search(ctx: click.Context, query: str, days: int, top: int,
     analyse(hits, rules)
 
     # ---- output --------------------------------------------------------
+    # Everything in the scoring pool that is NOT a keyword match becomes the
+    # reference distribution for "is this actually big".
+    hit_ids = {id(c) for c in hits}
+    background_scales = [c.features.get("scale", 0.0) for c in ranked
+                         if id(c) not in hit_ids and c.features.get("scale")]
+
     payload = build_report(hits, rules, top_n=top,
+                           background_scales=background_scales,
                            recommendations=plan(rules, limit=6),
                            benchmark={"available": False,
                                       "reason": "keyword search mode"},
@@ -634,9 +641,22 @@ def search(ctx: click.Context, query: str, days: int, top: int,
            "results only and are not comparable across searches. Run "
            "`reelpulse collect` a few times to build a baseline."))
 
+    reach = payload["reach"]
+
     if as_json:
         click.echo(json.dumps(payload, indent=2))
     else:
+        # The verdict goes ABOVE the ranking. Printed underneath, it reads as a
+        # footnote to a leaderboard; printed above, it frames what follows.
+        if reach["verdict"] == "nothing_viral":
+            click.echo("\n" + "=" * 68)
+            click.echo("  NOTHING HERE WENT VIRAL")
+            click.echo("=" * 68)
+            click.echo("  " + reach["headline"].replace("**", ""))
+            click.echo("=" * 68)
+        else:
+            click.echo(f"\n{reach['headline']}")
+
         click.echo(f"\nTop {min(top, len(hits))} for '{query}'"
                    f"{'' if anchored else '  [UNANCHORED — see note below]'}\n")
         for cluster, item in zip(hits, payload["top"]):
@@ -647,8 +667,15 @@ def search(ctx: click.Context, query: str, days: int, top: int,
                        f"{item['tags']['global_pool_size']} overall"
                        if anchored and item.get("tags", {}).get("global_rank") else "")
             click.echo(f"{item['rank']:>3}. [VVS {item['vvs']:+.2f}] {item['title'][:64]}")
+            pct = item.get("reach_percentile")
+            band = ("" if pct is None else
+                    f" (top {100 - pct:.0f}%)" if pct >= 50 else
+                    f" (bottom {max(pct, 1):.0f}%)")
+            reach_note = (f" | reach: {item['reach_tier']}{band}"
+                          if item.get("reach_tier") else "")
             click.echo(f"     {views} | {item['views_per_hour']:,.0f}/hr | "
-                       f"{'+'.join(item['platforms'])} | match: {tier}{overall}")
+                       f"{'+'.join(item['platforms'])} | match: {tier}{overall}"
+                       f"{reach_note}")
             if item.get("instagram_url"):
                 click.echo(f"     {item['instagram_url']}")
 
