@@ -1,0 +1,18 @@
+# Deliberately small. This runs unattended in a weekly cron; every dependency
+# is a thing that can break while nobody is watching.
+requests>=2.31
+PyYAML>=6.0
+click>=8.1
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+rapidfuzz>=3.0
+
+# scipy arrives with scikit-learn; eval/harness.py and the statistics tests use
+# it to cross-check the hand-rolled Fisher / Mann-Whitney implementations
+# against a reference. The library code itself needs neither.
+
+# Optional extras — install only if you want them:
+#   pytrends>=4.9      Google Trends momentum (unofficial, rate-limited)
+#   yt-dlp>=2024.1     transcripts from the public YouTube mirror
+#   pytest>=7.0        run the test suite

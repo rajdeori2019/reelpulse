@@ -1,0 +1,57 @@
+# Viral Velocity Score (VVS) weights.
+#
+# Each component is z-scored across the week's candidate pool BEFORE weighting,
+# so the numbers below are pure relative importance — they do not need to sum
+# to anything in particular, and you can retune them without touching code.
+#
+# `reelpulse calibrate` overwrites this file by fitting a ridge regression
+# against your own Instagram Graph API view counts. That is the whole point of
+# the hybrid design: the global leaderboard teaches the shape, your own account
+# teaches the scale.
+
+weights:
+  # How big it got, in log10 so a 40M-view clip does not drown out everything
+  # else. "Big" means views where a view count is published, and likes+3*comments
+  # where one is not (Instagram Hashtag Search returns no view_count for other
+  # people's reels). Each basis is standardised against its own cohort, so the
+  # two never compete on unequal units.
+  magnitude: 1.00
+
+  # How fast it got there, per hour since publish, on the same metric as
+  # magnitude above. The single strongest
+  # honest predictor of "this is going viral right now" rather than "this went
+  # viral six months ago".
+  velocity: 1.60
+
+  # Is velocity itself rising? Needs at least two snapshots (hence the daily
+  # cron). Neutral 0 on a first sighting so new entries are not punished.
+  acceleration: 1.30
+
+  # Number of distinct platforms carrying the same clip. Cross-posting breadth
+  # is the best free proxy for genuine global reach that no single API exposes.
+  breadth: 0.90
+
+  # (likes + 3*comments) / views. Comments weigh triple: they signal argument,
+  # tagging and save-worthiness, which is what the ranker actually rewards.
+  engagement_quality: 0.80
+
+  # Off-platform shares (Reddit posts + score) per 100k views. Captures the
+  # "someone reposted this everywhere" effect that on-platform stats miss.
+  share_ratio: 0.70
+
+  # Google Trends / Wikipedia pageview slope for the clip's dominant entity.
+  # Separates a reel that rode a news wave from one that made its own.
+  topic_momentum: 0.45
+
+  # exp(-age_days / 3.5). Keeps a Monday leaderboard about *this* week.
+  recency: 0.60
+
+# Guardrails applied after weighting.
+penalties:
+  # Clips with NEITHER a view count NOR any engagement can still rank, but
+  # capped, because their size is genuinely unknowable. Instagram-native clips
+  # measured on engagement are NOT hit by this.
+  unmeasured_magnitude: -0.50
+  # Same creator appearing more than twice in the top 10 gets diminishing
+  # weight, so one prolific account cannot own the whole board.
+  creator_repeat: -0.35

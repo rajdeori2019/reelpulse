@@ -1,0 +1,105 @@
+# Which signals ReelPulse collects, and how hard it pushes each one.
+# Every source here is free and officially sanctioned. Nothing scrapes Instagram.
+
+window_days: 7          # the "week" in "weekly top 10"
+top_n: 10               # size of the leaderboard
+min_candidates: 40      # below this the weekly z-scores get noisy; widen queries
+
+youtube:
+  enabled: true
+  # YouTube Data API v3 free quota is 10,000 units/day.
+  # search.list = 100 units, videos.list = 1 unit (up to 50 ids per call).
+  # 24 searches x 100 = 2,400 units, leaving plenty of headroom for a daily run.
+  max_searches_per_run: 24
+  results_per_search: 50
+  # Global coverage: regions are ISO-3166-1 alpha-2 codes.
+  regions: [US, IN, BR, ID, GB, MX, PH, NG, DE, JP, TR, EG]
+  # Seed queries. Keep them broad — the ranking, not the query, does the work.
+  queries:
+    - "#reels"
+    - "#shorts viral"
+    - "instagram reel"
+    - "trending"
+  # Only videos this short are treated as reel-shaped.
+  max_duration_s: 180
+
+instagram_oembed:
+  enabled: true
+  # Tokenless since Meta's 15 Jun 2026 change. No token, no App Review.
+  endpoint: "https://graph.facebook.com/v25.0/instagram_oembed"
+  # Be polite: this is a courtesy endpoint, not a data firehose.
+  requests_per_run: 60
+  sleep_between_s: 1.0
+
+instagram_hashtag:
+  # NATIVE INSTAGRAM DISCOVERY. Finds other people's public reels by hashtag,
+  # with like and comment counts. Needs IG_ACCESS_TOKEN + IG_USER_ID (the same
+  # Business/Creator token used for your own insights).
+  #
+  # HARD LIMIT: 30 unique hashtags per rolling 7 days, enforced by Meta across
+  # all your calls. ReelPulse tracks spend in SQLite and defers overflow rather
+  # than getting rejected. Budget accordingly — the list below is 14, leaving
+  # room for ad-hoc searches during the week.
+  enabled: true
+  edge: top_media      # top_media = most engaged; recent_media = last 24h
+  limit: 50            # max per hashtag (Meta caps at 50)
+  hashtags:
+    - reels
+    - reelsinstagram
+    - viralreels
+    - trendingreels
+    - explorepage
+    - reelitfeelit
+    - funny
+    - satisfying
+    - foodie
+    - fitness
+    - diy
+    - lifehack
+    - dance
+    - pets
+
+instagram_discovery:
+  # The ONLY free official route to view counts on reels you do not own.
+  # Works from a curated watchlist — there is no "find popular accounts" call.
+  # Targets must be Business/Creator accounts; personal accounts return errors.
+  enabled: true
+  limit: 25            # recent media per account
+  watchlist: []        # e.g. ["natgeo", "nasa", "9gag"] — add creators in your niche
+
+instagram_graph:
+  enabled: true        # only does anything if IG_ACCESS_TOKEN + IG_USER_ID are set
+  # Metric names valid after Meta's Apr-2025 consolidation of
+  # impressions/plays/video_views into a single `views` metric.
+  media_fields: "id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count"
+  insight_metrics: ["views", "reach", "likes", "comments", "shares", "saved", "total_interactions"]
+  reel_only_metrics: ["ig_reels_avg_watch_time", "ig_reels_video_view_total_time"]
+  limit: 50
+
+reddit:
+  enabled: true        # needs REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET (free)
+  # Free OAuth tier is ~100 queries/minute. We use a handful per run.
+  subreddits:
+    - InstagramReels
+    - nextfuckinglevel
+    - Damnthatsinteresting
+    - videos
+    - oddlysatisfying
+    - ContagiousLaughter
+    - interestingasfuck
+  listing: top
+  time_filter: week
+  limit: 100
+
+trends:
+  enabled: false       # pytrends is unofficial; opt in explicitly
+  geo: ""              # "" = worldwide
+  timeframe: "now 7-d"
+
+wikipedia:
+  enabled: true        # official, free, no key, no rate-limit pain
+  endpoint: "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article"
+  project: "en.wikipedia.org"
+
+tiktok_research:
+  enabled: false       # academic/non-profit approval only — not open to commercial use

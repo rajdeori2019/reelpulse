@@ -1,0 +1,68 @@
+name: Weekly report
+
+# The "no-code" path: fork the repo, add four secrets, turn on Pages.
+# Nothing else to run, nothing to host, nothing to pay for.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"        # Mondays 06:00 UTC
+  workflow_dispatch:            # ...or hit "Run workflow" whenever you like
+
+permissions:
+  contents: write               # to commit data/ and docs/
+  pages: write
+  id-token: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The database carries snapshot history across runs, which is what makes
+      # the acceleration signal possible. Without restoring it, every run looks
+      # like a first sighting and acceleration is permanently neutral.
+      - name: Restore snapshot history
+        uses: actions/cache@v4
+        with:
+          path: data/reelpulse.db
+          key: reelpulse-db-${{ github.run_id }}
+          restore-keys: reelpulse-db-
+
+      - name: Build the weekly report
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        run: python -m reelpulse run --out docs/index.html
+
+      - name: Commit the report
+        run: |
+          git config user.name  "reelpulse-bot"
+          git config user.email "actions@github.com"
+          git add -A data docs
+          git diff --staged --quiet || git commit -m "weekly report $(date -u +%Y-W%V)"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: report
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

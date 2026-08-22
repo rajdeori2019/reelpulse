@@ -1,0 +1,58 @@
+# Rule-based taxonomies used by core/analyze.py.
+#
+# Deliberately keyword-driven rather than model-driven: it costs nothing, runs
+# offline, and — more importantly — every classification is auditable. When a
+# reel is tagged `hook:pov` you can see exactly which token did it.
+#
+# Add your own niche terms here; the analyzer picks them up with no code change.
+
+hooks:
+  pov:            ["pov", "point of view", "when you", "when your", "me when", "that one friend"]
+  question:       ["?", "why does", "why do", "what happens", "did you know", "can you", "how many"]
+  shock_claim:    ["nobody", "no one", "never", "you've been", "youve been", "stop doing", "this is illegal", "banned", "shocking"]
+  wait_for_it:    ["wait for it", "watch till the end", "keep watching", "till the end", "last one"]
+  contrarian:     ["actually", "myth", "wrong", "unpopular opinion", "hot take", "everyone is wrong", "stop believing"]
+  listicle:       ["top 3", "top 5", "top 10", "3 things", "5 things", "7 ways", "reasons why", "things nobody"]
+  transformation: ["before and after", "before & after", "transformation", "day 1 vs", "glow up", "makeover", "from scratch"]
+  confession:     ["i quit", "i failed", "i lost", "honestly", "confession", "i was wrong", "nobody knows this"]
+  tutorial:       ["how to", "tutorial", "step by step", "recipe", "diy", "hack", "trick", "tip"]
+  stakes:         ["24 hours", "$", "challenge", "i tried", "for 30 days", "vs", "world record", "last to"]
+  anomaly:        ["you won't believe", "impossible", "insane", "unreal", "caught on camera", "rare", "first time"]
+  trend_ride:     ["trend", "trending", "challenge accepted", "viral", "everyone is doing"]
+
+topics:
+  comedy:         ["funny", "comedy", "prank", "fail", "laugh", "joke", "meme", "skit", "humor"]
+  food:           ["recipe", "cooking", "food", "eat", "chef", "kitchen", "meal", "restaurant", "baking"]
+  fitness:        ["workout", "gym", "fitness", "abs", "muscle", "training", "run", "yoga", "diet"]
+  animals:        ["dog", "cat", "puppy", "kitten", "animal", "pet", "wildlife", "bird", "horse"]
+  music_dance:    ["dance", "song", "music", "sing", "cover", "beat", "choreography", "remix", "concert"]
+  sports:         ["football", "soccer", "cricket", "basketball", "nba", "goal", "match", "skills", "olympic"]
+  beauty:         ["makeup", "skincare", "hair", "beauty", "outfit", "fashion", "style", "grwm", "nails"]
+  tech:           ["ai", "iphone", "android", "app", "gadget", "coding", "tech", "robot", "software"]
+  education:      ["learn", "history", "science", "explained", "fact", "physics", "math", "language", "psychology"]
+  satisfying:     ["satisfying", "asmr", "clean", "restore", "restoration", "pressure wash", "slime", "cake"]
+  travel:         ["travel", "hotel", "flight", "island", "city", "trip", "wander", "backpack"]
+  family:         ["baby", "kids", "mom", "dad", "family", "toddler", "parenting", "grandma"]
+  finance:        ["money", "invest", "salary", "stock", "crypto", "business", "profit", "millionaire"]
+  news_culture:   ["election", "war", "court", "police", "protest", "celebrity", "award", "announced"]
+
+# Calls to action detected in captions.
+ctas:
+  - "follow for"
+  - "comment"
+  - "tag someone"
+  - "save this"
+  - "share this"
+  - "link in bio"
+  - "double tap"
+  - "which one"
+  - "part 2"
+
+# Duration buckets, in seconds. Boundaries chosen to straddle the points where
+# completion rate historically falls off a cliff for short-form video.
+duration_buckets:
+  - [0,   7,   "ultra_short_0_7s"]
+  - [7,   15,  "short_7_15s"]
+  - [15,  30,  "mid_15_30s"]
+  - [30,  60,  "long_30_60s"]
+  - [60,  180, "extended_60s_plus"]

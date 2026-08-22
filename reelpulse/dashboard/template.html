@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReelPulse</title>
+<style>
+  :root{
+    --bg:#f7f7f5; --panel:#ffffff; --ink:#1a1a17; --muted:#6b6b63;
+    --line:#e3e3dd; --accent:#c65d3b; --accent-soft:#f5e5df;
+    --good:#3f7a55; --warn:#96702a; --chip:#f0efea;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  :root:not([data-theme="light"]){ @media (prefers-color-scheme: dark){
+    --bg:#14140f; --panel:#1c1c17; --ink:#ece9df; --muted:#9a978c;
+    --line:#2e2e26; --accent:#e08157; --accent-soft:#33241d;
+    --good:#7fb894; --warn:#d4ab5e; --chip:#26261f;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#14140f; --panel:#1c1c17; --ink:#ece9df; --muted:#9a978c;
+    --line:#2e2e26; --accent:#e08157; --accent-soft:#33241d;
+    --good:#7fb894; --warn:#d4ab5e; --chip:#26261f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:32px 20px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:28px}
+  h1{font-size:clamp(26px,4vw,38px);margin:0 0 6px;letter-spacing:-.02em}
+  h1 .dot{color:var(--accent)}
+  .sub{color:var(--muted);font-size:15px;margin:0}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:600}
+
+  .notice{background:var(--accent-soft);border:1px solid var(--line);
+          border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;
+          margin:0 0 28px;font-size:14px}
+  .notice strong{display:block;margin-bottom:4px}
+
+  h2{font-size:19px;margin:38px 0 14px;letter-spacing:-.01em;
+     display:flex;align-items:baseline;gap:10px}
+  h2 .hint{font-size:13px;font-weight:400;color:var(--muted)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+        padding:18px;margin-bottom:12px}
+  .reel{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start}
+  @media(max-width:680px){.reel{grid-template-columns:auto 1fr;}.reel .score{grid-column:2}}
+  .rank{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent);
+        min-width:38px;text-align:right;line-height:1.2}
+  .title{font-weight:600;font-size:16px;margin:0 0 4px}
+  .byline{color:var(--muted);font-size:13px;margin:0 0 10px}
+  .score{text-align:right;font-family:var(--mono)}
+  .score .v{font-size:20px;font-weight:700}
+  .score .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+  .stats{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);
+         margin:0 0 10px}
+  .stats b{color:var(--ink);font-family:var(--mono);font-weight:600}
+
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chip{background:var(--chip);border:1px solid var(--line);border-radius:99px;
+        padding:2px 9px;font-size:11.5px;font-family:var(--mono);color:var(--muted)}
+  .chip.hi{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+  .chip.ig{background:var(--accent);color:#fff;border-color:transparent}
+  .basis{color:var(--warn);font-style:italic;cursor:help}
+
+  details{margin-top:10px}
+  summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:500;
+          list-style:none;user-select:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";display:inline-block;transition:transform .15s}
+  details[open] summary::before{content:"▾ "}
+  .why{margin:10px 0 0;padding:0 0 0 16px;font-size:13.5px;color:var(--muted)}
+  .why li{margin:0 0 6px}
+  .why li strong{color:var(--ink)}
+
+  .bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin:8px 0 4px;
+       background:var(--chip)}
+  .bar i{display:block}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);
+        vertical-align:top}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+     font-weight:600;white-space:nowrap}
+  td.num{font-family:var(--mono);white-space:nowrap}
+  .tag{font-size:11px;padding:1px 7px;border-radius:99px;font-weight:600}
+  .tag.strong{background:var(--good);color:#fff}
+  .tag.moderate{background:var(--warn);color:#fff}
+  .tag.tentative{background:var(--chip);color:var(--muted);border:1px solid var(--line)}
+
+  .rec{border-left:3px solid var(--accent);padding-left:14px;margin-bottom:16px}
+  .rec .do{font-weight:600;font-size:15px;margin:0 0 3px}
+  .rec .ev{color:var(--muted);font-size:13px;margin:0}
+
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+         font-size:12.5px;color:var(--muted)}
+  a{color:var(--accent)}
+  .empty{color:var(--muted);font-size:14px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>ReelPulse<span class="dot">.</span></h1>
+    <p class="sub">Weekly global short-form leaderboard, and what the winners have in common.</p>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="notice" id="method"></div>
+
+  <h2>The board <span class="hint" id="boardhint"></span></h2>
+  <div id="board"></div>
+
+  <h2>Patterns <span class="hint" id="patternhint">significance-tested, FDR-corrected</span></h2>
+  <div class="card scroll"><table id="patterns"></table></div>
+  <p class="ev" id="miningnote"></p>
+
+  <h2>Recommendations <span class="hint">every line traceable to a rule above</span></h2>
+  <div class="card" id="recs"></div>
+
+  <h2>Your benchmark <span class="hint">Instagram Graph API, your own account</span></h2>
+  <div class="card" id="bench"></div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA = /*__REELPULSE_DATA__*/null;
+
+const fmt = n => n == null ? "n/a" : n >= 1e9 ? (n/1e9).toFixed(1)+"B"
+  : n >= 1e6 ? (n/1e6).toFixed(1)+"M" : n >= 1e3 ? (n/1e3).toFixed(1)+"K" : String(n);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function render(d){
+  if(!d){ document.getElementById("board").innerHTML =
+    '<p class="empty">No report data. Run <code>reelpulse demo</code> or <code>reelpulse run</code>.</p>'; return; }
+
+  const s = d.stats || {};
+  document.getElementById("meta").innerHTML = [
+    `Week <b>${esc(d.week)}</b>`,
+    `Generated <b>${new Date(d.generated_at).toLocaleString()}</b>`,
+    s.candidates != null ? `<b>${s.candidates}</b> candidates` : "",
+    s.clusters != null ? `<b>${s.clusters}</b> distinct clips` : "",
+    s.with_view_counts != null ? `<b>${s.with_view_counts}</b> with verified view counts` : "",
+  ].filter(Boolean).join("<span>·</span>");
+
+  const m = d.methodology || {};
+  document.getElementById("method").innerHTML =
+    `<strong>How to read this</strong>${esc(m.headline||"")} ${esc(m.not_claimed||"")}`;
+
+  document.getElementById("boardhint").textContent =
+    `top ${(d.top||[]).length} by Viral Velocity Score`;
+
+  document.getElementById("board").innerHTML = (d.top||[]).map(r => {
+    const parts = Object.entries(r.score_breakdown||{})
+      .filter(([k,v]) => !k.startsWith("_") && v > 0)
+      .sort((a,b)=>b[1]-a[1]);
+    const total = parts.reduce((a,[,v])=>a+v,0) || 1;
+    const hues = ["--accent","--good","--warn","--muted"];
+    const bar = parts.slice(0,6).map(([k,v],i)=>
+      `<i style="width:${(v/total*100).toFixed(1)}%;background:var(${hues[i%4]});opacity:${1-i*0.13}" title="${esc(k)}: ${v}"></i>`).join("");
+
+    const chips = [
+      r.instagram_native ? `<span class="chip ig">Instagram-native</span>` : "",
+      r.tags?.primary_hook && r.tags.primary_hook !== "none_detected"
+        ? `<span class="chip hi">hook: ${esc(r.tags.primary_hook.replace(/_/g," "))}</span>` : "",
+      r.tags?.topic ? `<span class="chip">${esc(r.tags.topic)}</span>` : "",
+      r.duration_s ? `<span class="chip">${Math.round(r.duration_s)}s</span>` : "",
+      `<span class="chip">${esc((r.platforms||[]).join(" + "))}</span>`,
+      (r.regions||[]).length ? `<span class="chip">${esc(r.regions.slice(0,5).join(" "))}</span>` : "",
+    ].filter(Boolean).join("");
+
+    const links = Object.entries(r.urls||{})
+      .map(([p,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(p)}</a>`).join(" · ");
+
+    const why = (r.why_it_worked||[]).map(w=>`<li>${esc(w)}</li>`).join("")
+      || "<li>No pattern matched — this one is an outlier, which is its own lesson.</li>";
+    const how = (r.score_explanation||[]).map(w=>`<li>${esc(w)}</li>`).join("");
+
+    return `<div class="card"><div class="reel">
+      <div class="rank">${r.rank}</div>
+      <div>
+        <p class="title">${esc(r.title)}</p>
+        <p class="byline">${esc(r.creator||"unknown creator")} · ${links}</p>
+        <div class="stats">
+          ${r.measurement_basis === "engagement"
+            ? `<span class="basis" title="Instagram publishes no view count for reels you don't own. This row is ranked on engagement instead.">no published view count</span>`
+            : `<span><b>${fmt(r.views)}</b> views</span>`}
+          <span><b>${fmt(Math.round(r.views_per_hour))}</b>/hr</span>
+          <span><b>${fmt(r.likes)}</b> likes</span>
+          <span><b>${fmt(r.comments)}</b> comments</span>
+          <span><b>${r.breadth}</b> platform${r.breadth>1?"s":""}</span>
+        </div>
+        <div class="chips">${chips}</div>
+        <div class="bar">${bar}</div>
+        <details><summary>Why it worked, and why it ranked here</summary>
+          <ul class="why"><li><strong>Why it worked (craft):</strong></li>${why}
+          <li style="margin-top:8px"><strong>Why it ranked here (scoring):</strong></li>${how}</ul>
+        </details>
+      </div>
+      <div class="score"><div class="v">${r.vvs>0?"+":""}${r.vvs.toFixed(2)}</div><div class="l">VVS</div></div>
+    </div></div>`;
+  }).join("");
+
+  const pats = d.patterns||[];
+  const mining = d.mining||{};
+  document.getElementById("patternhint").textContent =
+    mining.clips_in_pool
+      ? `${mining.clips_in_pool} clips across ${mining.weeks_pooled} week(s), ${mining.hypotheses_tested} hypotheses tested, FDR ${mining.fdr_level}`
+      : "significance-tested, FDR-corrected";
+
+  document.getElementById("patterns").innerHTML = pats.length ? `
+    <thead><tr><th>Pattern</th><th>Beats a random clip</th><th>Lift</th><th>n</th><th>q</th><th>Strength</th></tr></thead>
+    <tbody>${pats.map(p=>`<tr>
+      <td>${esc(p.antecedent.join("  +  "))}</td>
+      <td class="num">${p.superiority!=null ? (p.superiority*100).toFixed(0)+"% of the time" : "-"}</td>
+      <td class="num">${p.lift.toFixed(2)}×</td>
+      <td class="num">${p.n}</td>
+      <td class="num">${p.q_value!=null ? p.q_value.toFixed(3) : "-"}</td>
+      <td><span class="tag ${p.strength}">${p.strength}</span></td>
+    </tr>`).join("")}</tbody>` :
+    `<tbody><tr><td class="empty">No pattern cleared significance testing. With a small pool that usually means not enough data yet rather than nothing being true — keep collecting.</td></tr></tbody>`;
+
+  document.getElementById("miningnote").textContent = mining.note || "";
+
+  document.getElementById("recs").innerHTML = (d.recommendations||[]).length
+    ? d.recommendations.map(r=>`<div class="rec">
+        <p class="do">${esc(r.recommendation)} <span class="tag ${r.confidence}">${r.confidence}</span></p>
+        <p class="ev">${esc(r.evidence)}</p></div>`).join("")
+      + `<p class="ev" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)">
+         These are correlations within one week of survivor-biased data. Each is a hypothesis to test on your own account, not a law.</p>`
+    : '<p class="empty">No recommendations yet — need more clips.</p>';
+
+  const b = d.benchmark||{};
+  document.getElementById("bench").innerHTML = b.available ? `
+    <div class="stats" style="font-size:15px">
+      <span>Your reels analysed <b>${b.your_reels_analysed}</b></span>
+      <span>Your median <b>${fmt(b.your_median_views)}</b></span>
+      <span>Your best <b>${fmt(b.your_best_views)}</b></span>
+      <span>Top-10 median <b>${fmt(b.week_top10_median_views)}</b></span>
+      <span>Gap <b>${b.gap_multiple ?? "n/a"}×</b></span>
+    </div><p class="ev">${esc(b.note||"")}</p>`
+    : `<p class="empty">${esc(b.reason||"Not connected.")}</p>`;
+
+  document.getElementById("foot").innerHTML =
+    `Sources: ${esc((m.sources||[]).join(" · "))}<br>
+     ReelPulse is open source and reads only free, officially sanctioned APIs. No Instagram scraping, no logged-in sessions, no personal data.`;
+}
+render(DATA);
+</script>
+</body>
+</html>
