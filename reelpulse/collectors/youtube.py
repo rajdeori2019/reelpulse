@@ -66,9 +66,30 @@ class YouTubeCollector(Collector):
             .replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
         # Rotate region x query pairs so global coverage stays even across runs.
-        pairs = list(itertools.product(cfg.get("regions", ["US"]),
-                                       cfg.get("queries", ["#shorts"])))
-        pairs = pairs[: int(cfg.get("max_searches_per_run", 24))]
+        #
+        # This used to just truncate the product, which meant only the FIRST
+        # ceil(budget/len(queries)) regions were EVER sampled — with 12 regions,
+        # 4 queries and a 24-call budget, six countries were permanently
+        # invisible and the "global" board was quietly regional. Confirmed on
+        # the first live run, which came back almost entirely from the first
+        # few regions in the list.
+        #
+        # Offsetting by the ISO week number walks the whole region list over
+        # successive runs, so every region is reached within a few weeks while
+        # any single run still respects the quota budget.
+        regions = list(cfg.get("regions", ["US"]))
+        queries = list(cfg.get("queries", ["#shorts"]))
+        budget = int(cfg.get("max_searches_per_run", 24))
+
+        offset = datetime.now(timezone.utc).isocalendar()[1] * max(
+            budget // max(len(queries), 1), 1)
+        pairs = list(itertools.product(regions, queries))
+        if pairs:
+            start = (offset % len(pairs))
+            pairs = (pairs[start:] + pairs[:start])[:budget]
+
+        log.info("[youtube] sampling %d region/query pairs: %s", len(pairs),
+                 ", ".join(sorted({r for r, _ in pairs})))
 
         video_ids: dict[str, str] = {}   # id -> region it surfaced in
         for region, query in pairs:

@@ -1,0 +1,135 @@
+name: Keyword search
+
+# Ad-hoc search for a specific term, triggered by hand from the Actions tab.
+#
+# Quota note: each search.list call costs 100 of the 10,000 free daily units.
+# `variants x regions` is capped below so a broad search cannot drain the day
+# and leave the scheduled snapshot dry — the limiter also reserves 20% that
+# ad-hoc runs like this one are not allowed to touch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      query:
+        description: 'Search term. Supports "exact phrase", OR between terms, -excluded'
+        required: true
+        type: string
+      days:
+        description: 'How many days back to look'
+        required: false
+        default: '7'
+        type: string
+      top:
+        description: 'How many results to show'
+        required: false
+        default: '20'
+        type: string
+      min_relevance:
+        description: '0.4 = keep partial matches | 0.7 = full term match | 0.9 = term must be in the title'
+        required: false
+        default: '0.4'
+        type: string
+      max_searches:
+        description: 'Max API calls (each costs 100 quota units of your 10,000/day)'
+        required: false
+        default: '12'
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Two searches writing docs/ at once would collide on the commit.
+concurrency:
+  group: reelpulse-search
+  cancel-in-progress: false
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    outputs:
+      slug: ${{ steps.run.outputs.slug }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The stored pool is what anchors the scores. Without it a search ranks
+      # its results only against each other, so the best clip in a thin niche
+      # scores like a global smash. The run says so loudly when that happens.
+      - name: Restore stored history
+        uses: actions/cache@v4
+        with:
+          path: data/reelpulse.db
+          key: reelpulse-db-${{ github.run_id }}
+          restore-keys: reelpulse-db-
+
+      - name: Search
+        id: run
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          QUERY: ${{ inputs.query }}
+        run: |
+          # Filename-safe slug. Passed via env rather than interpolated into the
+          # shell, so a quote or backtick in the query cannot break out.
+          SLUG=$(python -c "
+          import os, re
+          q = os.environ['QUERY'].lower()
+          s = re.sub(r'[^a-z0-9]+', '-', q).strip('-')[:50] or 'search'
+          print(s)")
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
+          mkdir -p docs/search
+          python -m reelpulse search "$QUERY" \
+            --days "${{ inputs.days }}" \
+            --top "${{ inputs.top }}" \
+            --min-relevance "${{ inputs.min_relevance }}" \
+            --max-searches "${{ inputs.max_searches }}" \
+            --out "docs/search/$SLUG.html" | tee search-output.txt
+
+      - name: Build the search index page
+        run: python scripts/build_search_index.py
+
+      - name: Commit results
+        run: |
+          git config user.name  "reelpulse-bot"
+          git config user.email "actions@github.com"
+          git add -A data docs
+          git diff --staged --quiet || git commit -m "search: ${{ inputs.query }}"
+          git pull --rebase --autostash || true
+          git push
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: search-${{ steps.run.outputs.slug }}
+          path: |
+            docs/search/*.html
+            search-output.txt
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: search
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Where to find it
+        run: |
+          echo "::notice title=Search dashboard::${{ steps.deploy.outputs.page_url }}search/${{ needs.search.outputs.slug }}.html"

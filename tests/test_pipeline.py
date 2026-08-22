@@ -335,3 +335,34 @@ def test_tiny_pools_report_nothing_rather_than_guessing():
     from reelpulse.core.patterns import mine_from_rows
     rows = [({"hook:pov"}, 1.0), ({"hook:question"}, 0.0)] * 5
     assert mine_from_rows(rows) == []
+
+
+def test_region_sampling_covers_every_region_over_time():
+    """The bug the first live run exposed.
+
+    Truncating the region x query product meant only the first
+    budget/len(queries) regions were EVER sampled — six of twelve countries were
+    permanently invisible while the board called itself global.
+    """
+    import itertools
+
+    regions = ["US", "IN", "BR", "ID", "GB", "MX", "PH", "NG", "DE", "JP", "TR", "EG"]
+    queries = ["#reels", "#shorts viral", "instagram reel", "trending"]
+    budget = 24
+
+    pairs = list(itertools.product(regions, queries))
+
+    # Old behaviour: always the same prefix.
+    old = {r for r, _ in pairs[:budget]}
+    assert len(old) == 6, "fixture no longer reproduces the original bug"
+
+    # New behaviour: walk the list by week and every region gets reached.
+    seen = set()
+    for week in range(1, 53):
+        offset = week * max(budget // len(queries), 1)
+        start = offset % len(pairs)
+        window = (pairs[start:] + pairs[:start])[:budget]
+        assert len(window) == budget, "a week sampled the wrong number of pairs"
+        seen |= {r for r, _ in window}
+
+    assert seen == set(regions), f"never sampled: {set(regions) - seen}"
