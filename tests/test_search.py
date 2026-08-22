@@ -257,3 +257,49 @@ def test_unanchored_still_catches_obviously_tiny_results():
 def test_empty_result_set():
     from reelpulse.core.reach import assess
     assert assess([], [1.0, 2.0])["verdict"] == "empty"
+
+
+# ---- expand: the bug that killed a live run -------------------------------
+
+def test_or_query_searches_each_alternative_separately():
+    """The live failure: `"career advice" OR "career guidance"` was joined into
+    the single search string `career advice career guidance` — a phrase nobody
+    writes — so YouTube returned nothing and the workflow exited 1."""
+    q = parse_query('"career advice" OR "career guidance"')
+    variants = expand(q, extra=2)
+
+    assert "career advice" in variants
+    assert "career guidance" in variants
+    assert "career advice career guidance" not in variants, \
+        "OR alternatives were concatenated into one dead query again"
+
+
+def test_or_words_each_get_their_own_search():
+    q = parse_query("pilates OR reformer")
+    variants = expand(q, extra=2)
+    assert "pilates" in variants and "reformer" in variants
+    assert "pilates reformer" not in variants
+
+
+def test_and_terms_stay_in_one_query():
+    """AND means one search for all terms — splitting them would change the
+    meaning from 'both' to 'either'."""
+    q = parse_query("sourdough starter")
+    variants = expand(q, extra=2)
+    assert variants[0] == "sourdough starter"
+    assert "sourdough" not in variants
+
+
+def test_expand_respects_the_call_budget():
+    q = parse_query("sourdough")
+    assert len(expand(q, extra=0)) == 1
+    assert len(expand(q, extra=2)) == 3
+
+
+def test_expand_never_drops_an_alternative_to_stay_in_budget():
+    """Budget trims qualifiers, never the alternatives themselves — dropping one
+    would silently answer a different question than the one asked."""
+    q = parse_query("alpha OR beta OR gamma OR delta")
+    variants = expand(q, extra=0)
+    for term in ("alpha", "beta", "gamma", "delta"):
+        assert term in variants

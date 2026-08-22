@@ -216,12 +216,43 @@ def filter_candidates(candidates: list[Candidate], query: Query,
 
 
 def expand(query: Query, extra: int = 3) -> list[str]:
-    """Query variants to widen a YouTube search without changing its meaning.
+    """Search strings to send upstream.
 
-    Not synonyms — guessing synonyms silently changes what the user asked for.
-    These are format qualifiers that surface the same topic in different corners
-    of the index.
+    Each ALTERNATIVE gets its own search. This used to join every term into one
+    string, which quietly destroyed OR queries: `"career advice" OR "career
+    guidance"` became the single search `career advice career guidance` — a
+    phrase nobody has ever written, matching nothing, so the run died with "no
+    results" on a query that should have returned plenty.
+
+    Only after alternatives are covered do format qualifiers get added, and
+    still no synonyms: guessing synonyms silently changes what was asked for.
     """
-    base = " ".join(query.terms) or query.raw
-    variants = [base, f"{base} shorts", f"{base} reel", f"#{base.replace(' ', '')}"]
-    return variants[:1 + extra]
+    alternatives: list[str] = []
+
+    # Quoted phrases are alternatives in their own right.
+    alternatives.extend(query.phrases)
+
+    # OR terms likewise: each is a separate way to satisfy the query.
+    alternatives.extend(query.optional)
+
+    # AND terms describe ONE search, so they join into a single string.
+    if query.required:
+        alternatives.append(" ".join(query.required))
+
+    if not alternatives:
+        alternatives = [query.raw]
+
+    # De-duplicate, preserving order.
+    seen: set[str] = set()
+    ordered = [a for a in alternatives if a and not (a in seen or seen.add(a))]
+
+    # Spend any remaining budget widening the FIRST alternative, since a single
+    # alternative is the common case and benefits most from the extra angles.
+    out = list(ordered)
+    budget = 1 + extra
+    qualifiers = ["shorts", "reel"]
+    i = 0
+    while len(out) < budget and i < len(qualifiers):
+        out.append(f"{ordered[0]} {qualifiers[i]}")
+        i += 1
+    return out[:max(budget, len(ordered))]

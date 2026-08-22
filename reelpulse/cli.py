@@ -472,6 +472,36 @@ def advise(ctx: click.Context, topic: str, hook: str, duration: float,
 
 # ---------------------------------------------------------------------------
 
+
+
+def _empty_search(query: str, days: int, sources: dict, reason: str,
+                  store: Store, out: str | None, tiers: dict | None = None) -> None:
+    """Report an empty search honestly, and exit 0.
+
+    A niche that produced nothing is a real finding. Treating it as a build
+    failure loses the log, loses the artifacts, and tells the user their tool is
+    broken when it is working correctly.
+    """
+    click.echo("\n" + "=" * 68)
+    click.echo("  NO RESULTS")
+    click.echo("=" * 68)
+    click.echo("  " + reason)
+    if tiers:
+        click.echo("  match tiers seen: "
+                   + ", ".join(f"{k}={v}" for k, v in sorted(tiers.items()) if v))
+    click.echo("=" * 68 + "\n")
+
+    payload = build_report([], [], top_n=0,
+                           benchmark={"available": False, "reason": "keyword search"},
+                           stats={"query": query, "fetched": 0, "relevant": 0,
+                                  "days": days, "match_tiers": tiers or {}})
+    payload["methodology"]["headline"] = (
+        f"No results for '{query}' over the last {days} days. {reason}")
+    if out:
+        click.echo(f"page -> {render_dashboard(payload, TEMPLATE, out)}")
+    store.close()
+
+
 @main.command()
 @click.argument("query")
 @click.option("--days", default=7, show_default=True, help="Look-back window.")
@@ -552,10 +582,19 @@ def search(ctx: click.Context, query: str, days: int, top: int,
                            time_filter="week" if days <= 7 else "month")
 
     if not found:
-        click.echo("Nothing came back. Check `reelpulse doctor` — keyword search "
-                   "needs IG_ACCESS_TOKEN (Instagram) and/or YOUTUBE_API_KEY.",
-                   err=True)
-        sys.exit(1)
+        # "The APIs returned nothing" is a legitimate answer to a niche query,
+        # not a crash. Exiting non-zero here failed the whole workflow run and
+        # threw away the log and artifacts along with it. Only a genuinely
+        # broken setup should be an error.
+        if not cfg.has("YOUTUBE_API_KEY") and not cfg.has("IG_ACCESS_TOKEN"):
+            click.echo("No API credentials configured. Run `reelpulse doctor`.",
+                       err=True)
+            sys.exit(1)
+        _empty_search(query, days, sources,
+                      f"The APIs returned no short-form video for '{query}' in the "
+                      f"last {days} days. Try a wider --days window or a broader term.",
+                      store, out)
+        return
 
     # ---- relevance gate ------------------------------------------------
     relevant, tally = filter_candidates(found, parsed, min_relevance)
@@ -563,11 +602,13 @@ def search(ctx: click.Context, query: str, days: int, top: int,
                f"(tiers: {', '.join(f'{k}={v}' for k, v in sorted(tally.items()) if v)})")
 
     if not relevant:
-        click.echo(f"\nNothing cleared the relevance bar for '{query}'. Either "
-                   f"the term is too niche for this week, or try "
-                   f"--min-relevance 0.3.", err=True)
-        store.close()
-        sys.exit(1)
+        _empty_search(query, days, sources,
+                      f"{len(found)} clips came back but none mentioned '{query}' "
+                      f"closely enough to clear the relevance bar "
+                      f"(min-relevance {min_relevance}). Lower it to 0.4, widen "
+                      f"--days, or broaden the term.",
+                      store, out, tiers=tally)
+        return
 
     # Enrich Instagram permalinks so results are clickable reels, not bare ids.
     InstagramOEmbedCollector(sources.get("instagram_oembed", {}), limiter).enrich(relevant)
