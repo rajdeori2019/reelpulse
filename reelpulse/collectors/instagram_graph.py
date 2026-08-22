@@ -22,7 +22,20 @@ from .base import Collector
 
 log = logging.getLogger("reelpulse")
 
-API = "https://graph.instagram.com/v23.0"
+# graph.facebook.com, NOT graph.instagram.com.
+#
+# Meta ships two incompatible Instagram APIs:
+#   graph.instagram.com  — "Instagram API with Instagram Login". No Facebook
+#                          Page needed, but NO HASHTAG SEARCH.
+#   graph.facebook.com   — "Instagram API with Facebook Login". Requires the
+#                          account be linked to a Facebook Page, and is the only
+#                          one that supports Hashtag Search.
+#
+# ReelPulse needs hashtag search, so the whole project is on the Facebook-Login
+# path and every Instagram call must use the same host. Pointing own-media calls
+# at graph.instagram.com while hashtag search used graph.facebook.com meant one
+# token could never satisfy both.
+API = "https://graph.facebook.com/v23.0"
 
 
 class InstagramGraphCollector(Collector):

@@ -57,12 +57,9 @@ Two paths. Both are free.
 ### A. Hosted, hands-off (recommended)
 
 1. Fork this repo.
-2. Get an **Instagram token** — this is the one that makes it an Instagram tool.
-   Switch your account to Business or Creator (free, in the app), then
-   [developers.facebook.com](https://developers.facebook.com) → create app → add
-   the Instagram product → generate a long-lived token. Note your IG user id.
-   This single credential unlocks Hashtag Search, Business Discovery, your own
-   insights, and weight calibration.
+2. Get an **Instagram token** — see [Instagram setup](#instagram-setup) below.
+   It's the fiddliest step and has one non-obvious hard requirement: your
+   Instagram account must be linked to a **Facebook Page**.
 3. Get a **YouTube Data API key** — [console.cloud.google.com](https://console.cloud.google.com) → new project → enable "YouTube Data API v3" → Credentials → API key. No credit card.
 4. Repo → Settings → Secrets and variables → Actions → add `IG_ACCESS_TOKEN`,
    `IG_USER_ID`, `YOUTUBE_API_KEY`.
@@ -103,6 +100,7 @@ thing in about four seconds.
 | Command | What it does |
 |---|---|
 | `reelpulse doctor` | What's configured, what's missing, and what each gap costs you |
+| `reelpulse instagram-setup` | Test an Instagram token and auto-find your account id |
 | `reelpulse collect` | One collection pass + snapshot. This is the daily cron job |
 | `reelpulse run` | The full pipeline: collect → cluster → score → mine → report → dashboard |
 | `reelpulse search` | Find trending reels for a **keyword** and stack rank them |
@@ -114,6 +112,81 @@ thing in about four seconds.
 ```bash
 python -m reelpulse advise --topic food --hook pov --duration 9 --hashtags 2 --question
 ```
+
+---
+
+## Instagram setup
+
+The step that unlocks native Instagram discovery. It has one requirement people
+miss, and it is not optional:
+
+> **Hashtag Search only works with "Instagram API with _Facebook_ Login", which
+> requires your Instagram professional account to be linked to a Facebook Page.**
+
+Meta ships two Instagram APIs. The newer "Instagram Login" path needs no Facebook
+Page and is much easier to set up — and it **does not support Hashtag Search at
+all**. Without hashtag search there is no open discovery of other people's reels,
+which is the whole point. So: Facebook Page, no way around it.
+
+| | Instagram Login | **Facebook Login** |
+|---|---|---|
+| Facebook Page needed | no | **yes** |
+| Hashtag Search | ✗ | **✓** |
+| Business Discovery | ✓ | ✓ |
+| Your own insights | ✓ | ✓ |
+
+### Steps
+
+1. **Instagram account → Professional.** In the app: Settings → Account type →
+   switch to Business or Creator. Free.
+2. **Link it to a Facebook Page.** Create one if you don't have one — it can be
+   empty and unpublished. Instagram app → Settings → Accounts Centre → add the
+   Page.
+3. **Create a Meta app.** [developers.facebook.com/apps](https://developers.facebook.com/apps)
+   → Create app → type **Business** → add the **Instagram** product.
+4. **Generate a token** in the
+   [Graph API Explorer](https://developers.facebook.com/tools/explorer/): pick
+   your app, click "Generate Access Token", and grant these four permissions —
+   `instagram_basic`, `pages_show_list`, `pages_read_engagement`,
+   `instagram_manage_insights`.
+5. **Make it long-lived.** The Explorer gives you a token that dies in about an
+   hour. Exchange it in the
+   [Access Token Tool](https://developers.facebook.com/tools/accesstoken/) —
+   click the info icon next to your token, then "Extend Access Token". You get
+   ~60 days.
+6. **Verify it:**
+
+```bash
+python -m reelpulse instagram-setup --token EAAxxxxx
+```
+
+That command is the point of this section. It tells you exactly which of the
+three capabilities work, distinguishes a missing permission from an unlinked
+Page — Meta words those almost identically — and **prints the `IG_USER_ID` it
+found**, so you never have to hunt for it.
+
+```
+[OK  ] Token valid
+       expires 2026-10-21 (59 days)
+[OK  ] All required permissions granted
+[OK  ] Instagram account linked to a Facebook Page
+       @you (id 17841400000000) via Page 'Your Page' — 4,210 followers
+[OK  ] Hashtag Search (open discovery)
+[OK  ] Business Discovery (real view counts)
+[OK  ] Your own media
+
+Everything works. Put these in your .env or GitHub Secrets:
+  IG_ACCESS_TOKEN=EAAxxxxx...
+  IG_USER_ID=17841400000000
+```
+
+**No App Review needed.** You're using your own account, which counts as
+Standard Access. App Review only applies when other people's accounts are
+involved.
+
+**Tokens expire every ~60 days.** When Instagram-native results silently vanish
+from your weekly board, that's what happened. Re-run `instagram-setup` to
+confirm, generate a new token, update the secret.
 
 ---
 

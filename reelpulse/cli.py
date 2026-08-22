@@ -475,6 +475,97 @@ def advise(ctx: click.Context, topic: str, hook: str, duration: float,
 
 
 
+@main.command("instagram-setup")
+@click.option("--token", default=None,
+              help="Access token to test. Defaults to IG_ACCESS_TOKEN.")
+@click.option("--ig-user-id", default=None,
+              help="Skip auto-discovery and test this account id.")
+@click.option("--hashtag", default="reels", show_default=True,
+              help="Hashtag to probe. Spends one of the 30-per-7-days slots, so "
+                   "the default is one the weekly run already uses.")
+@click.pass_context
+def instagram_setup(ctx: click.Context, token: str | None,
+                    ig_user_id: str | None, hashtag: str) -> None:
+    """Test an Instagram token and find your account id.
+
+    Meta reports a missing Page link and a missing permission with almost the
+    same error text. This separates them, and prints the IG_USER_ID it finds so
+    you never have to hunt for it.
+    """
+    from .setup_instagram import NEEDED, run_all
+
+    token = token or cfg.env("IG_ACCESS_TOKEN")
+    if not token or token.startswith("your_"):
+        click.echo("No token. Pass --token or set IG_ACCESS_TOKEN in .env.", err=True)
+        sys.exit(1)
+
+    click.echo("\nChecking your Instagram setup\n" + "-" * 68)
+    results = run_all(token, ig_user_id, hashtag_probe=hashtag)
+
+    tok = results["token"]
+    mark = "OK  " if tok["ok"] else "FAIL"
+    click.echo(f"[{mark}] Token valid")
+    if not tok["ok"]:
+        click.echo(f"       {tok['detail']}")
+        click.echo("\n  Generate a fresh token in the Graph API Explorer, then "
+                   "exchange it\n  for a long-lived one. See the README.\n")
+        sys.exit(1)
+
+    if tok.get("never_expires"):
+        click.echo("       never expires (page token)")
+    elif tok.get("expires_at"):
+        from datetime import datetime, timezone
+        when = datetime.fromtimestamp(tok["expires_at"], tz=timezone.utc)
+        days = (when - datetime.now(timezone.utc)).days
+        click.echo(f"       expires {when:%Y-%m-%d} ({days} days) — a short-lived "
+                   f"token lasts ~1 hour; anything under 7 days was not exchanged "
+                   f"for a long-lived one")
+
+    if tok["missing"]:
+        click.echo(f"[WARN] Missing permissions: {', '.join(tok['missing'])}")
+        for scope in tok["missing"]:
+            click.echo(f"       {scope:<28} {NEEDED[scope]}")
+    else:
+        click.echo("[OK  ] All required permissions granted")
+
+    accounts = results.get("accounts", {})
+    if accounts.get("linked"):
+        click.echo(f"[OK  ] Instagram account linked to a Facebook Page")
+        for acct in accounts["linked"]:
+            followers = acct.get("followers") or 0
+            click.echo(f"       @{acct['ig_username']} (id {acct['ig_user_id']}) "
+                       f"via Page '{acct['page']}' — {followers:,} followers")
+    else:
+        click.echo("[FAIL] No Instagram professional account linked to a Facebook Page")
+        click.echo(f"       {accounts.get('detail', '')}")
+        click.echo("       Hashtag Search REQUIRES this link. Instagram app -> "
+                   "Settings ->\n       Accounts Centre -> link a Facebook Page.")
+
+    if results.get("fatal"):
+        click.echo(f"\nBlocked: {results['fatal']}\n")
+        sys.exit(1)
+
+    for key, label in (("hashtag_search", "Hashtag Search (open discovery)"),
+                       ("business_discovery", "Business Discovery (real view counts)"),
+                       ("own_insights", "Your own media")):
+        check = results.get(key, {})
+        click.echo(f"[{'OK  ' if check.get('ok') else 'FAIL'}] {label}")
+        click.echo(f"       {check.get('detail', '')}")
+
+    working = [k for k in ("hashtag_search", "business_discovery", "own_insights")
+               if results.get(k, {}).get("ok")]
+    click.echo("\n" + "-" * 68)
+    if len(working) == 3:
+        click.echo("Everything works. Put these in your .env or GitHub Secrets:\n")
+        click.echo(f"  IG_ACCESS_TOKEN={token[:12]}...  (the full token)")
+        click.echo(f"  IG_USER_ID={results['ig_user_id']}")
+    else:
+        click.echo(f"{len(working)} of 3 capabilities working. The failures above "
+                   f"name the cause;\nmost are a missing permission or an "
+                   f"unlinked Facebook Page.")
+    click.echo()
+
+
 def _empty_search(query: str, days: int, sources: dict, reason: str,
                   store: Store, out: str | None, tiers: dict | None = None) -> None:
     """Report an empty search honestly, and exit 0.
