@@ -29,7 +29,8 @@ from .core.recommend import ReelPlan, benchmark_against_own, next_best_change, p
 from .core.report import build_report, render_dashboard, week_key, write_report
 from .core.score import score_clusters
 from .db import Store
-from .limits import LIMITS, RateLimiter
+from .limits import (LIMITS, QuotaExhausted, RateLimiter,
+                     ServiceCoolingDown, limit_for)
 from .models import Candidate
 
 logging.basicConfig(level=logging.INFO,
@@ -507,11 +508,14 @@ def _empty_search(query: str, days: int, sources: dict, reason: str,
 @click.option("--days", default=7, show_default=True, help="Look-back window.")
 @click.option("--top", default=20, show_default=True, help="How many to show.")
 @click.option("--regions", default=None,
-              help="Comma-separated ISO codes. Default: config sources.yaml.")
-@click.option("--variants", default=3, show_default=True,
+              help="Comma-separated ISO codes. Default: the first 2 from "
+                   "sources.yaml — a keyword search rarely needs more, and each "
+                   "extra region multiplies the cost.")
+@click.option("--variants", default=2, show_default=True,
               help="Query variants to try (each x region costs 100 quota units).")
-@click.option("--max-searches", default=12, show_default=True,
-              help="Hard cap on search.list calls. 12 = 1,200 of your 10k daily units.")
+@click.option("--max-searches", default=4, show_default=True,
+              help="Hard cap on search.list calls. Each costs 100 units of your "
+                   "10,000/day, so 4 = 400 units and ~20 searches a day.")
 @click.option("--min-relevance", default=0.4, show_default=True,
               help="0.4 keeps partial matches; 0.7 requires a full term match; "
                    "0.9 demands the term in the title.")
@@ -521,12 +525,14 @@ def _empty_search(query: str, days: int, sources: dict, reason: str,
               help="Also query Instagram Hashtag Search. Spends from the hard "
                    "30-unique-hashtags-per-7-days budget.")
 @click.option("--out", default=None, help="Also write a dashboard here.")
+@click.option("--dry-run", is_flag=True,
+              help="Show the exact queries and unit cost, spend nothing.")
 @click.option("--json", "as_json", is_flag=True, help="Machine-readable output.")
 @click.pass_context
 def search(ctx: click.Context, query: str, days: int, top: int,
            regions: str | None, variants: int, max_searches: int,
            min_relevance: float, anchor: bool, instagram: bool,
-           out: str | None, as_json: bool) -> None:
+           dry_run: bool, out: str | None, as_json: bool) -> None:
     """Find trending reels for a KEYWORD and stack rank them.
 
     \b
@@ -542,13 +548,60 @@ def search(ctx: click.Context, query: str, days: int, top: int,
     store = Store(ctx.obj["db"])
 
     limiter = RateLimiter(store)
+
+    # Budget pre-flight. `search` calls collectors directly rather than through
+    # safe_collect(), so an exhausted quota used to surface as an unhandled
+    # QuotaExhausted and a non-zero exit — a crash report for what is really
+    # just "you have spent this much today".
+    yt = limit_for("youtube")
+    left = limiter.remaining("youtube")
+    needed = int(max_searches) * YouTubeCollector.SEARCH_COST
+    if left < YouTubeCollector.SEARCH_COST:
+        spent = limiter.spent("youtube")
+        click.echo("\n" + "=" * 68)
+        click.echo("  OUT OF YOUTUBE QUOTA")
+        click.echo("=" * 68)
+        click.echo(f"  Spent {spent:,.0f} of {yt.quota:,} units. "
+                   f"{yt.reserve:.0%} is reserved for scheduled runs, so "
+                   f"{left:,.0f} is available to ad-hoc searches.")
+        click.echo("  Quota resets at midnight US Pacific. Nothing is broken and "
+                   "nothing was throttled —")
+        click.echo("  the limiter refused before sending, which is what keeps "
+                   "your key healthy.")
+        click.echo("=" * 68 + "\n")
+        store.close()
+        return
+    if left < needed:
+        affordable = int(left // YouTubeCollector.SEARCH_COST)
+        click.echo(f"Budget allows {affordable} of {max_searches} planned API "
+                   f"calls today — narrowing the search rather than failing.")
+        max_searches = affordable
+
     parsed = parse_query(query)
     if not parsed.terms:
         click.echo("Nothing searchable in that query.", err=True)
         sys.exit(1)
 
     region_list = ([r.strip().upper() for r in regions.split(",")] if regions
-                   else sources.get("youtube", {}).get("regions", ["US"])[:6])
+                   else sources.get("youtube", {}).get("regions", ["US"])[:2])
+
+    if dry_run:
+        planned = expand(parsed, extra=variants - 1)
+        pairs = [(r, q) for q in planned for r in region_list][:max_searches]
+        click.echo(f"\nDRY RUN — nothing will be spent.\n")
+        click.echo(f"  parsed as : phrases={parsed.phrases} required={parsed.required} "
+                   f"optional={parsed.optional} excluded={parsed.excluded}")
+        click.echo(f"  searches  : {len(pairs)} calls x "
+                   f"{YouTubeCollector.SEARCH_COST} units = "
+                   f"{len(pairs) * YouTubeCollector.SEARCH_COST} units")
+        click.echo(f"  budget    : {limiter.remaining('youtube'):,.0f} available "
+                   f"of {limit_for('youtube').quota:,}")
+        click.echo("\n  queries actually sent to YouTube:")
+        for region, q in pairs:
+            click.echo(f"    [{region}] {q!r}")
+        click.echo()
+        store.close()
+        return
 
     # ---- collect -------------------------------------------------------
     found: list[Candidate] = []
@@ -573,9 +626,14 @@ def search(ctx: click.Context, query: str, days: int, top: int,
                                f"week (this search spent {before - after})")
 
     youtube_cfg = dict(sources.get("youtube", {}))
-    found += YouTubeCollector(youtube_cfg, limiter).search_keyword(
-        expand(parsed, extra=variants - 1), regions=region_list,
-        days=days, max_searches=max_searches)
+    try:
+        found += YouTubeCollector(youtube_cfg, limiter).search_keyword(
+            expand(parsed, extra=variants - 1), regions=region_list,
+            days=days, max_searches=max_searches)
+    except (QuotaExhausted, ServiceCoolingDown) as exc:
+        # Ran out partway through. Whatever was already collected still counts.
+        click.echo(f"\nStopped early: {exc}\n"
+                   f"Continuing with the {len(found)} clips collected so far.")
 
     reddit = RedditCollector(sources.get("reddit", {}), limiter)
     found += reddit.search(" ".join(parsed.terms),

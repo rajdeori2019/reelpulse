@@ -175,11 +175,38 @@ implementation gap.
 
 ### Quota
 
-Each `search.list` call costs 100 of your 10,000 free daily units. The default
-is capped at 12 calls (1,200 units) per search — roughly **four keyword searches
-a day** alongside the daily snapshot. Raise it with `--max-searches` if you have
-headroom; the cap exists so a broad search can't silently drain the day's quota
-and leave the cron job dry.
+Each `search.list` call costs 100 of your 10,000 free daily units, **regardless
+of how many results it returns** — so the lever is call count, not page size.
+
+| | Calls | Units | Searches/day |
+|---|---|---|---|
+| Weekly report | 24 | 2,400 | — |
+| Keyword search (default) | 4 | 400 | ~14 |
+| Keyword search (`--max-searches 12`) | 12 | 1,200 | ~4 |
+
+The default is 4 calls: 2 query variants x 2 regions. A keyword search rarely
+needs the six-region fan-out the weekly board uses, and each extra region
+multiplies the cost.
+
+**Check before you spend.** `--dry-run` prints the exact queries and the unit
+cost without touching the API:
+
+```bash
+python -m reelpulse search '"career advice" OR "career guidance"' --dry-run
+```
+
+```
+  searches  : 4 calls x 100 units = 400 units
+  budget    : 8,000 available of 10,000
+  queries actually sent to YouTube:
+    [US] 'career advice'
+    [IN] 'career advice'
+```
+
+That output is worth reading before any real search — it shows what the parser
+made of your query, which is where a search most often goes wrong. Running out
+mid-day is not damage (the limiter refuses before sending, so nothing gets
+throttled) but it does mean waiting for the midnight-Pacific reset.
 
 ---
 

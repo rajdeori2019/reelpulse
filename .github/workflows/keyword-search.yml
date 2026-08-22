@@ -30,10 +30,15 @@ on:
         default: '0.4'
         type: string
       max_searches:
-        description: 'Max API calls (each costs 100 quota units of your 10,000/day)'
+        description: 'Max API calls. Each costs 100 of your 10,000 daily units (4 = 400 units, ~20 searches/day)'
         required: false
-        default: '12'
+        default: '4'
         type: string
+      dry_run:
+        description: 'Preview the queries and cost without spending any quota'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -70,6 +75,11 @@ jobs:
           key: reelpulse-db-${{ github.run_id }}
           restore-keys: reelpulse-db-
 
+      - name: Budget check
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python -m reelpulse limits | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Search
         id: run
         env:
@@ -95,12 +105,28 @@ jobs:
             --top "${{ inputs.top }}" \
             --min-relevance "${{ inputs.min_relevance }}" \
             --max-searches "${{ inputs.max_searches }}" \
-            --out "docs/search/$SLUG.html" | tee search-output.txt
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
+            --out "docs/search/$SLUG.html" 2>&1 | tee search-output.txt
+
+      # Put the output on the run page itself. Without this, diagnosing a
+      # failure means someone hand-copying log text out of the Actions viewer.
+      - name: Report on the run page
+        if: always()
+        run: |
+          {
+            echo "## Search: \`${{ inputs.query }}\`"
+            echo ""
+            echo '```'
+            tail -c 8000 search-output.txt 2>/dev/null || echo "(no output captured)"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Build the search index page
+        if: ${{ !inputs.dry_run }}
         run: python scripts/build_search_index.py
 
       - name: Commit results
+        if: ${{ !inputs.dry_run }}
         run: |
           git config user.name  "reelpulse-bot"
           git config user.email "actions@github.com"
@@ -110,18 +136,21 @@ jobs:
           git push
 
       - uses: actions/upload-artifact@v4
+        if: always()          # a failed run is exactly when the log is wanted
         with:
-          name: search-${{ steps.run.outputs.slug }}
+          name: search-${{ steps.run.outputs.slug || 'failed' }}
           path: |
             docs/search/*.html
             search-output.txt
 
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ !inputs.dry_run }}
         with:
           path: docs
 
   deploy:
     needs: search
+    if: ${{ !inputs.dry_run }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
