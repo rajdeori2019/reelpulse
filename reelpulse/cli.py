@@ -44,11 +44,62 @@ TEMPLATE = Path(__file__).resolve().parent / "dashboard" / "template.html"
 @click.group()
 @click.option("--db", default="data/reelpulse.db", show_default=True,
               help="SQLite path.")
+@click.option("--ledger", default="data/api_ledger.json", show_default=True,
+              help="Committed rate-limit ledger. Survives a cache eviction, "
+                   "which the database does not.")
 @click.pass_context
-def main(ctx: click.Context, db: str) -> None:
+def main(ctx: click.Context, db: str, ledger: str) -> None:
     """Weekly global short-form leaderboard + viral pattern analysis."""
     ctx.ensure_object(dict)
     ctx.obj["db"] = db
+    ctx.obj["ledger"] = ledger
+
+
+# ---------------------------------------------------------------------------
+
+@main.group("ledger")
+def ledger_group() -> None:
+    """Carry the rate-limit ledger between throwaway runners.
+
+    On CI the database lives in a cache GitHub evicts after seven days — the
+    exact length of Instagram's hashtag window. Exporting the ledger to a file
+    that gets committed is what stops a cache miss from quietly resetting every
+    budget to full.
+    """
+
+
+@ledger_group.command("export")
+@click.pass_context
+def ledger_export(ctx: click.Context) -> None:
+    """Write the live ledger to the committed JSON file."""
+    from .ledger import export_ledger
+    store = Store(ctx.obj["db"])
+    try:
+        result = export_ledger(store, ctx.obj["ledger"])
+    finally:
+        store.close()
+    click.echo(f"ledger: wrote {result['spend']} spend rows and "
+               f"{result['cooldowns']} cooldown(s) to {result['path']}")
+
+
+@ledger_group.command("import")
+@click.pass_context
+def ledger_import(ctx: click.Context) -> None:
+    """Merge the committed ledger into the database before a run."""
+    from .ledger import import_ledger, staleness
+    warning = staleness(ctx.obj["ledger"])
+    if warning:
+        click.echo(f"ledger: {warning}")
+    store = Store(ctx.obj["db"])
+    try:
+        result = import_ledger(store, ctx.obj["ledger"])
+    finally:
+        store.close()
+    if result.get("reason"):
+        click.echo(f"ledger: {result['reason']}")
+    else:
+        click.echo(f"ledger: merged {result['imported']} new spend rows "
+                   f"({result['skipped']} already present)")
 
 
 # ---------------------------------------------------------------------------
@@ -95,10 +146,12 @@ def doctor(ctx: click.Context) -> None:
     # through by accident, so surface what is left before anyone plans a sweep.
     if cfg.has("IG_ACCESS_TOKEN") and cfg.has("IG_USER_ID"):
         try:
-            from .collectors import HashtagBudget
-            budget = HashtagBudget(Store(ctx.obj["db"]))
-            click.echo(f"\nInstagram hashtag budget: {budget.remaining()}/30 "
-                       f"unique hashtags left in the rolling 7-day window")
+            from .collectors import HashtagBudget, MAX_UNIQUE_HASHTAGS
+            store = Store(ctx.obj["db"])
+            budget = HashtagBudget(store, RateLimiter(store))
+            click.echo(f"\nInstagram hashtag budget: {budget.remaining()}/"
+                       f"{MAX_UNIQUE_HASHTAGS} unique hashtags left in the "
+                       f"rolling 7-day window")
             if budget.remaining() == 0:
                 click.echo("  Exhausted. Instagram hashtag discovery is paused "
                            "until the oldest queries age out.")
@@ -208,18 +261,17 @@ def limits(ctx: click.Context, as_json: bool) -> None:
         click.echo(f"{row['service']:<20}{used:>18}  {left:>10}  "
                    f"{row['per_minute']:>6g}/min  {status}")
 
-    # The hashtag window is a separate Meta limit with its own accounting.
-    try:
-        from .collectors import HashtagBudget
-        budget = HashtagBudget(store)
-        click.echo(f"\nInstagram hashtags: {budget.remaining()}/30 unique left "
-                   f"in the rolling 7-day window")
-        spent = sorted(budget.spent())
-        if spent:
-            click.echo("  spent on: " + ", ".join("#" + h for h in spent[:12])
-                       + (f" (+{len(spent) - 12} more)" if len(spent) > 12 else ""))
-    except Exception:  # noqa: BLE001
-        pass
+    # instagram_hashtags already has a row above — it is a first-class limit
+    # now, not a side ledger. What the table cannot show is *which* tags are
+    # inside the window, and that is the part you need before planning a sweep:
+    # re-querying one of these is free, and every other tag costs a slot.
+    spent_tags = sorted(limiter.spent_keys("instagram_hashtags"))
+    if spent_tags:
+        click.echo("\nHashtags inside the 7-day window (re-querying these is "
+                   "free):")
+        click.echo("  " + ", ".join("#" + h for h in spent_tags[:12])
+                   + (f" (+{len(spent_tags) - 12} more)"
+                      if len(spent_tags) > 12 else ""))
 
     reserved = [r for r in rows if r["reserved"]]
     if reserved:
@@ -500,7 +552,17 @@ def instagram_setup(ctx: click.Context, token: str | None,
         sys.exit(1)
 
     click.echo("\nChecking your Instagram setup\n" + "-" * 68)
-    results = run_all(token, ig_user_id, hashtag_probe=hashtag)
+
+    # Metered like everything else. The hashtag probe in particular spends one
+    # of only thirty weekly slots, and a doctor that spends budget without
+    # booking it is exactly the kind of quiet leak this tool exists to catch.
+    store = Store(ctx.obj["db"])
+    limiter = RateLimiter(store)
+    try:
+        results = run_all(token, ig_user_id, hashtag_probe=hashtag,
+                          limiter=limiter)
+    finally:
+        store.close()
 
     tok = results["token"]
     mark = "OK  " if tok["ok"] else "FAIL"

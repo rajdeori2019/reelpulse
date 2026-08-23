@@ -302,7 +302,7 @@ A 429-only handler reads the first two as permanent bugs, retries them, and
 keeps hammering a throttled endpoint. Detection here reads the response *body*,
 not just the status code.
 
-**Four mechanisms, in the order they engage:**
+**Six mechanisms, in the order they engage:**
 
 1. **Persistent quota ledger.** Spend is written to SQLite, so limits that span
    runs are actually enforced — an in-memory counter resets every process and
@@ -321,6 +321,36 @@ not just the status code.
    cooldown — honouring Meta's own `estimated_time_to_regain_access`, which is
    reported in **minutes**, not seconds. The cooldown survives process exit, so
    tomorrow's cron run doesn't immediately re-trigger it.
+
+5. **Distinct-counted budgets.** Instagram's hashtag window allows 30 *unique
+   hashtags* per rolling 7 days, however many times each is queried. Counting
+   calls would halve the usable budget for nothing; counting tags means a
+   re-query of one already inside the window is free and is never refused, even
+   when the window is otherwise full. One hashtag costs two API calls (resolve,
+   then fetch) and exactly one slot. Every hashtag request is charged to both
+   ceilings it sits under — the weekly slot *and* one of the app's 200 Graph
+   calls per hour — because Meta enforces both.
+
+6. **A ledger that outlives the runner.** On GitHub Actions the database lives
+   in a cache GitHub evicts after **seven days** without a hit — the same length
+   as the hashtag window. An eviction would make every budget read as full, and
+   the first symptom would be Meta rejecting a sweep with an error that says
+   nothing about why. So the live part of the ledger is exported to
+   `data/api_ledger.json` and committed. Every workflow merges it before
+   spending and writes it back afterwards, including on failure — a run that
+   died half-way still spent what it spent.
+
+   ```bash
+   python -m reelpulse ledger import   # before a run
+   python -m reelpulse ledger export   # after, always
+   ```
+
+**Nothing reaches the network unmetered.** This is enforced structurally rather
+than by review: `tests/test_no_unmetered_calls.py` walks the source with the AST
+and fails if any function sends an HTTP request without acquiring budget first
+and booking the outcome after. It was written because two call sites — the
+Instagram setup doctor and Reddit's OAuth token exchange — sat outside the
+limiter for weeks precisely because they were small enough that nobody looked.
 
 **Reserve headroom.** Each service holds back a slice of quota (YouTube 20%,
 Instagram 25%) that ad-hoc commands cannot touch. Three keyword searches on a
@@ -341,7 +371,10 @@ youtube                  2400/10000 units      5600      60/min  ##........
 instagram_graph            37/200 calls         113      30/min  #.........
 instagram_oembed            0/500 calls         450      30/min  ..........
 
-Instagram hashtags: 27/30 unique left in the rolling 7-day window
+instagram_hashtags        3/30 hashtags        27      30/min  #.........
+
+Hashtags inside the 7-day window (re-querying these is free):
+  #reels, #reelsinstagram, #viralreels
 
 Held in reserve for scheduled runs (ad-hoc commands cannot spend this):
   youtube             2000 units

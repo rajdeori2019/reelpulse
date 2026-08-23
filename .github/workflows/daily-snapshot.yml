@@ -37,6 +37,12 @@ jobs:
           key: reelpulse-db-${{ github.run_id }}
           restore-keys: reelpulse-db-
 
+      - name: Load the rate-limit ledger
+        # The database lives in a cache GitHub evicts after 7 days — the same
+        # length as Instagram's hashtag window. This committed file is what
+        # stops an eviction from silently resetting every budget to full.
+        run: python -m reelpulse ledger import
+
       - name: Snapshot
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -45,6 +51,12 @@ jobs:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: python -m reelpulse collect
+
+      - name: Save the rate-limit ledger
+        if: always()
+        # always(), because a run that failed part-way still spent what it
+        # spent. Losing that record is how the next run overspends.
+        run: python -m reelpulse ledger export
 
       - name: Persist the database
         run: |

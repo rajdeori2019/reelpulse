@@ -82,6 +82,13 @@ class Limit:
     usage_header_ceiling: float = 80.0   # % at which to start slowing down
     default_cooldown_s: int = 900
 
+    # Some quotas count DISTINCT THINGS rather than calls. Instagram's hashtag
+    # window allows 30 unique hashtags per 7 days — querying the same tag twenty
+    # times costs one slot, and twenty different tags costs twenty. Counting
+    # calls would over-report by the repeat factor and refuse work that is
+    # actually free.
+    distinct: bool = False
+
     # Some quotas reset on a wall-clock boundary rather than rolling.
     # YouTube's 10,000 units reset at midnight Pacific: spend 8,000 at 23:00 PT
     # and a rolling 24h window would still count it at 00:30 PT, refusing runs
@@ -92,6 +99,13 @@ class Limit:
 
 
 LIMITS: dict[str, Limit] = {
+    # Instagram Hashtag Search: 30 UNIQUE hashtags per rolling 7 days, enforced
+    # by Meta across every call the token makes. This is the tightest limit in
+    # the project and the only one that cannot be waited out in hours.
+    "instagram_hashtags": Limit("instagram_hashtags", per_minute=30, quota=30,
+                                quota_window_s=7 * 86_400, unit="hashtags",
+                                reserve=0.0, distinct=True),
+
     # 10,000 units/day per project. search.list costs 100, videos.list costs 1.
     # Quota is counted in UNITS, not calls, so cost varies per endpoint.
     "youtube": Limit("youtube", per_minute=60, quota=10_000,
@@ -304,7 +318,8 @@ class RateLimiter:
         service   TEXT NOT NULL,
         ts        TEXT NOT NULL,
         cost      REAL NOT NULL,
-        endpoint  TEXT
+        endpoint  TEXT,
+        key       TEXT
     );
     CREATE INDEX IF NOT EXISTS idx_spend ON api_spend(service, ts);
 
@@ -322,14 +337,31 @@ class RateLimiter:
         self.sleeper = sleeper
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.buckets: dict[str, TokenBucket] = {}
-        self._memory_spend: list[tuple[str, datetime, float]] = []
+        self._memory_spend: list[tuple[str, datetime, float, str | None]] = []
         self._memory_cooldown: dict[str, tuple[datetime, str]] = {}
         self._consecutive: dict[str, int] = {}
         self._slowdown: dict[str, float] = {}
 
         if store is not None:
             store.conn.executescript(self.SCHEMA)
+            self._migrate(store)
             store.conn.commit()
+
+    @staticmethod
+    def _migrate(store) -> None:
+        """Add columns a database created by an older version is missing.
+
+        `CREATE TABLE IF NOT EXISTS` does nothing to a table that already
+        exists, so a ledger restored from a cache written before distinct
+        counting has no `key` column and every insert fails. That is a hard
+        crash on the first real call of the run, in the one component whose
+        whole job is to keep runs from failing.
+        """
+        have = {row[1] for row in
+                store.conn.execute("PRAGMA table_info(api_spend)")}
+        if "key" not in have:
+            store.conn.execute("ALTER TABLE api_spend ADD COLUMN key TEXT")
+            log.info("[limits] migrated api_spend: added the key column")
 
     # ---- ledger ------------------------------------------------------
 
@@ -346,13 +378,51 @@ class RateLimiter:
             cutoff = window_start(limit, self.clock())
 
         if self.store is not None:
-            cur = self.store.conn.execute(
-                "SELECT COALESCE(SUM(cost), 0) FROM api_spend "
-                "WHERE service = ? AND ts >= ?", (service, cutoff.isoformat()))
+            if limit.distinct:
+                cur = self.store.conn.execute(
+                    "SELECT COUNT(DISTINCT key) FROM api_spend "
+                    "WHERE service = ? AND ts >= ? AND key IS NOT NULL",
+                    (service, cutoff.isoformat()))
+            else:
+                cur = self.store.conn.execute(
+                    "SELECT COALESCE(SUM(cost), 0) FROM api_spend "
+                    "WHERE service = ? AND ts >= ?", (service, cutoff.isoformat()))
             return float(cur.fetchone()[0] or 0.0)
 
-        return sum(cost for svc, ts, cost in self._memory_spend
-                   if svc == service and ts >= cutoff)
+        rows = [(svc, ts, cost, key) for svc, ts, cost, key in self._memory_spend
+                if svc == service and ts >= cutoff]
+        if limit.distinct:
+            return float(len({k for _, _, _, k in rows if k is not None}))
+        return sum(cost for _, _, cost, _ in rows)
+
+    def spent_keys(self, service: str) -> set[str]:
+        """Which distinct things are booked inside the window right now.
+
+        The count alone is not enough for a distinct-counted limit: planning a
+        sweep needs to know *which* hashtags are already inside the window,
+        because those are free and everything else costs a slot.
+        """
+        cutoff = window_start(limit_for(service), self.clock())
+        if self.store is not None:
+            cur = self.store.conn.execute(
+                "SELECT DISTINCT key FROM api_spend "
+                "WHERE service = ? AND ts >= ? AND key IS NOT NULL",
+                (service, cutoff.isoformat()))
+            return {row[0] for row in cur.fetchall()}
+        return {k for svc, ts, _, k in self._memory_spend
+                if svc == service and ts >= cutoff and k is not None}
+
+    def already_spent(self, service: str, key: str) -> bool:
+        """Is this exact key already inside the window, and therefore free?"""
+        limit = limit_for(service)
+        cutoff = window_start(limit, self.clock())
+        if self.store is not None:
+            cur = self.store.conn.execute(
+                "SELECT 1 FROM api_spend WHERE service = ? AND ts >= ? AND key = ? "
+                "LIMIT 1", (service, cutoff.isoformat(), key))
+            return cur.fetchone() is not None
+        return any(svc == service and ts >= cutoff and k == key
+                   for svc, ts, _, k in self._memory_spend)
 
     def remaining(self, service: str, *, respect_reserve: bool = True) -> float:
         limit = limit_for(service)
@@ -361,15 +431,19 @@ class RateLimiter:
         ceiling = limit.quota * (1 - limit.reserve if respect_reserve else 1.0)
         return max(ceiling - self.spent(service), 0.0)
 
-    def record(self, service: str, cost: float, endpoint: str = "") -> None:
+    def record(self, service: str, cost: float, endpoint: str = "",
+               key: str | None = None) -> None:
+        """`key` identifies what was spent, for limits that count distinct
+        things (a hashtag) rather than calls."""
         now = self.clock()
         if self.store is not None:
             self.store.conn.execute(
-                "INSERT INTO api_spend (service, ts, cost, endpoint) VALUES (?,?,?,?)",
-                (service, now.isoformat(), float(cost), endpoint))
+                "INSERT INTO api_spend (service, ts, cost, endpoint, key) "
+                "VALUES (?,?,?,?,?)",
+                (service, now.isoformat(), float(cost), endpoint, key))
             self.store.conn.commit()
         else:
-            self._memory_spend.append((service, now, float(cost)))
+            self._memory_spend.append((service, now, float(cost), key))
 
     def prune(self, older_than_days: int = 30) -> None:
         if self.store is None:
@@ -424,7 +498,7 @@ class RateLimiter:
     # ---- the pre-flight gate -----------------------------------------
 
     def acquire(self, service: str, cost: float = 1.0, *,
-                respect_reserve: bool = True) -> None:
+                respect_reserve: bool = True, key: str | None = None) -> None:
         """Block until it is safe to send, or refuse outright.
 
         Refusing before sending is the entire point. A request that would breach
@@ -438,6 +512,22 @@ class RateLimiter:
                 f"{service} is in cooldown for another {wait / 60:.1f} min")
 
         limit = limit_for(service)
+
+        if limit.distinct and key is None:
+            # Without a key there is nothing to count, so the spend would be
+            # invisible: the ledger would read zero however many calls were
+            # made, and the first sign of trouble would be Meta refusing the
+            # 31st hashtag. Better to fail here, loudly, at the call site.
+            raise ValueError(
+                f"{service} counts distinct {limit.unit}, so every call must "
+                f"pass key= naming the one being spent")
+
+        # A distinct-counted key already inside the window costs nothing, so it
+        # must not be refused when the quota looks full.
+        if limit.distinct and self.already_spent(service, key):
+            self._bucket(service).take(1.0, sleeper=self.sleeper)
+            return
+
         if limit.quota is not None:
             left = self.remaining(service, respect_reserve=respect_reserve)
             if left < cost:
@@ -459,9 +549,16 @@ class RateLimiter:
     # ---- post-flight -------------------------------------------------
 
     def observe(self, service: str, status: int, headers, body: dict | None,
-                cost: float, endpoint: str = "") -> tuple[bool, bool, str]:
-        """Record the outcome and adapt. Returns classify()'s verdict."""
-        self.record(service, cost, endpoint)
+                cost: float, endpoint: str = "",
+                key: str | None = None) -> tuple[bool, bool, str]:
+        """Record the outcome and adapt. Returns classify()'s verdict.
+
+        `key` is threaded through to the ledger so a distinct-counted limit
+        books the thing that was spent, not just the call. Callers must not
+        record separately as well: two rows for one request would be harmless
+        for a distinct count but would double-charge a unit-counted one.
+        """
+        self.record(service, cost, endpoint, key=key)
 
         usage = parse_meta_usage(headers or {})
         limit = limit_for(service)

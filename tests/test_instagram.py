@@ -97,6 +97,89 @@ def test_cached_hashtag_id_is_reused(store):
     assert budget.cached_id("never_queried") is None
 
 
+# ---- one ledger, not two --------------------------------------------------
+
+def _limiter(store):
+    from reelpulse.limits import RateLimiter
+    return RateLimiter(store, sleeper=lambda s: None)
+
+
+def test_the_limiter_is_the_authority_when_one_is_attached(store):
+    """The window used to be counted twice — once by this class, once by the
+    limiter — and nothing kept them equal. Whichever a caller happened to read
+    was the one that decided, so a sweep could be planned against a budget that
+    had already been spent through the other path."""
+    lim = _limiter(store)
+    lim.record("instagram_hashtags", 1.0, "ig_hashtag_search", key="reels")
+    lim.record("instagram_hashtags", 1.0, "ig_hashtag_search", key="funny")
+
+    budget = HashtagBudget(store, lim)
+    assert budget.spent() == {"reels", "funny"}
+    assert budget.remaining() == MAX_UNIQUE_HASHTAGS - 2
+
+
+def test_a_budget_with_no_limiter_still_counts_for_itself(store):
+    """The fallback path has to keep working: a Store opened without a limiter
+    is still expected to know what it has spent."""
+    budget = HashtagBudget(store)
+    budget.record("reels", "1")
+    assert budget.remaining() == MAX_UNIQUE_HASHTAGS - 1
+
+
+def test_the_collector_and_the_cli_read_the_same_number(store):
+    """`reelpulse limits` reads the limiter; the collector plans from the
+    budget. If those two disagree the tool tells you one thing and does
+    another, which is worse than reporting nothing."""
+    lim = _limiter(store)
+    for i in range(5):
+        lim.record("instagram_hashtags", 1.0, "x", key=f"tag{i}")
+
+    from_cli = lim.remaining("instagram_hashtags", respect_reserve=False)
+    from_collector = HashtagBudget(store, lim).remaining()
+    assert from_cli == from_collector == MAX_UNIQUE_HASHTAGS - 5
+
+
+def test_a_hashtag_call_is_charged_to_both_ceilings_it_sits_under(store,
+                                                                 monkeypatch):
+    """One request, two limits. It spends a weekly hashtag slot *and* one of
+    the app's hourly Graph calls; booking only the tighter one leaves the other
+    reading low, and the hourly one is what actually gets you throttled."""
+    lim = _limiter(store)
+    collector = InstagramHashtagCollector({}, store, lim)
+
+    class _Resp:
+        status_code, ok, headers, content = 200, True, {}, b"{}"
+        def json(self):
+            return {"data": [{"id": "h1"}]}
+
+    monkeypatch.setattr(collector.session, "get", lambda *a, **k: _Resp())
+    collector._resolve("sourdough", "tok", "IG1")
+
+    assert lim.spent("instagram_hashtags") == 1.0
+    assert lim.spent("instagram_graph") == 1.0
+
+
+def test_resolving_then_fetching_one_tag_costs_one_slot(store, monkeypatch):
+    """Two calls per hashtag, one slot. Meta counts distinct tags, so charging
+    per call would halve the usable budget for no reason."""
+    lim = _limiter(store)
+    collector = InstagramHashtagCollector({}, store, lim)
+
+    class _Resp:
+        status_code, ok, headers, content = 200, True, {}, b"{}"
+        def json(self):
+            return {"data": [{"id": "h1"}]}
+
+    monkeypatch.setattr(collector.session, "get", lambda *a, **k: _Resp())
+    collector._resolve("sourdough", "tok", "IG1")
+    collector.get_json("https://example.com/h1/top_media",
+                       service="instagram_hashtags", key="sourdough",
+                       also="instagram_graph", retries=1)
+
+    assert lim.spent("instagram_hashtags") == 1.0, "distinct tag charged twice"
+    assert lim.spent("instagram_graph") == 2.0, "both calls hit the Graph API"
+
+
 # ---- parsing --------------------------------------------------------------
 
 def test_hashtag_parse_never_invents_a_view_count():

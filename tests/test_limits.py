@@ -312,3 +312,75 @@ def test_window_start_survives_missing_tzdata():
     start = L.window_start(broken, now)
     assert start <= now
     assert (now - start) <= timedelta(days=1)
+
+
+# ---- distinct-counted limits ---------------------------------------------
+
+def test_a_distinct_limit_refuses_a_call_with_nothing_to_count():
+    """Instagram's window allows 30 unique hashtags, not 30 calls. A call that
+    does not say which hashtag it is spending cannot be counted at all — the
+    ledger would read zero forever and the first symptom would be Meta
+    rejecting the 31st tag a week later."""
+    lim = RateLimiter(sleeper=lambda s: None)
+    with pytest.raises(ValueError, match="key="):
+        lim.acquire("instagram_hashtags", 1.0)
+
+
+def test_a_repeat_of_a_spent_key_is_allowed_even_at_the_ceiling():
+    """Re-querying a hashtag already inside the window is free at Meta's end,
+    so refusing it would strand budget we have already paid for."""
+    lim = RateLimiter(sleeper=lambda s: None)
+    for i in range(30):
+        lim.record("instagram_hashtags", 1.0, "x", key=f"tag{i}")
+    assert lim.remaining("instagram_hashtags") == 0
+
+    lim.acquire("instagram_hashtags", 1.0, key="tag0")   # free, must not raise
+    with pytest.raises(QuotaExhausted):
+        lim.acquire("instagram_hashtags", 1.0, key="brandnew")
+
+
+def test_distinct_spend_counts_things_not_calls():
+    lim = RateLimiter(sleeper=lambda s: None)
+    for tag in ["reels", "funny", "reels", "reels"]:
+        lim.record("instagram_hashtags", 1.0, "x", key=tag)
+    assert lim.spent("instagram_hashtags") == 2.0
+    assert lim.spent_keys("instagram_hashtags") == {"reels", "funny"}
+
+
+def test_distinct_keys_age_out_of_the_window():
+    """The window rolls. A tag queried eight days ago has freed its slot."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime(2026, 8, 22, 12, 0, tzinfo=timezone.utc)
+    clock = {"t": now - timedelta(days=8)}
+    lim = RateLimiter(sleeper=lambda s: None, clock=lambda: clock["t"])
+    lim.record("instagram_hashtags", 1.0, "x", key="old")
+    clock["t"] = now
+    lim.record("instagram_hashtags", 1.0, "x", key="fresh")
+    assert lim.spent_keys("instagram_hashtags") == {"fresh"}
+
+
+def test_a_database_from_an_older_version_is_migrated_not_crashed():
+    """The cached ledger on CI predates distinct counting. Without a migration
+    every insert fails on the first real call of the run — a hard crash in the
+    one component whose job is to stop runs from failing."""
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "old.db"
+        store = Store(path)
+        # The pre-distinct schema, exactly as an older release wrote it.
+        store.conn.execute("DROP TABLE IF EXISTS api_spend")
+        store.conn.execute(
+            "CREATE TABLE api_spend (service TEXT NOT NULL, ts TEXT NOT NULL, "
+            "cost REAL NOT NULL, endpoint TEXT)")
+        store.conn.execute(
+            "INSERT INTO api_spend VALUES ('youtube', ?, 100.0, 'search.list')",
+            (datetime.now(timezone.utc).isoformat(),))
+        store.conn.commit()
+
+        lim = RateLimiter(store)                       # migrates on construction
+        lim.record("instagram_hashtags", 1.0, "x", key="reels")
+
+        assert lim.spent("youtube") == 100.0, "existing spend was lost"
+        assert lim.spent_keys("instagram_hashtags") == {"reels"}
+        store.close()

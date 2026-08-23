@@ -1,0 +1,100 @@
+name: Instagram setup check
+
+# Runs the Instagram setup doctor without needing Python locally.
+#
+# Meta reports "your Facebook Page isn't linked" and "you're missing a
+# permission" with nearly identical wording. This tells you which one you have,
+# and prints the IG_USER_ID it discovers — a value Meta shows nowhere obvious.
+#
+# Costs no YouTube quota. It does spend ONE of the 30-per-7-days Instagram
+# hashtag slots, which is why the probe defaults to a hashtag the weekly run
+# already queries.
+
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'Token to test. Leave EMPTY to use the IG_ACCESS_TOKEN secret (recommended — a token typed here is visible in the run log).'
+        required: false
+        type: string
+      hashtag:
+        description: 'Hashtag to probe. Spends one of your 30-per-7-days slots.'
+        required: false
+        default: 'reels'
+        type: string
+
+permissions:
+  contents: write     # to commit the rate-limit ledger
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The probe spends a real hashtag slot, so this run has to
+      # remember it the same way the data workflows do.
+      - uses: actions/cache@v4
+        with:
+          path: data/reelpulse.db
+          key: reelpulse-db-${{ github.run_id }}
+          restore-keys: reelpulse-db-
+
+      - name: Load the rate-limit ledger
+        # The database lives in a cache GitHub evicts after 7 days — the same
+        # length as Instagram's hashtag window. This committed file is what
+        # stops an eviction from silently resetting every budget to full.
+        run: python -m reelpulse ledger import
+
+      - name: Check the Instagram setup
+        env:
+          # The typed input wins only when supplied; otherwise the stored secret
+          # is used, which keeps the token out of the log entirely.
+          IG_ACCESS_TOKEN: ${{ inputs.token != '' && inputs.token || secrets.IG_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$IG_ACCESS_TOKEN" ]; then
+            echo "No token. Either paste one into the 'token' input, or add an"
+            echo "IG_ACCESS_TOKEN repository secret first."
+            exit 1
+          fi
+          python -m reelpulse instagram-setup --hashtag "${{ inputs.hashtag }}" \
+            2>&1 | tee ig-setup.txt
+
+      - name: Save the rate-limit ledger
+        if: always()
+        # always(), because the probe may have spent its hashtag slot before a
+        # later check failed. A slot spent and not recorded is a slot the
+        # weekly run will try to spend again.
+        run: |
+          python -m reelpulse ledger export
+          git config user.name  "reelpulse-bot"
+          git config user.email "actions@github.com"
+          git add -A data/api_ledger.json
+          git diff --staged --quiet || {
+            git commit -m "ledger: instagram setup probe"
+            git pull --rebase --autostash && git push
+          }
+
+      # The whole point is reading the result without digging through log
+      # viewers, so it goes straight onto the run summary page.
+      - name: Report on the run page
+        if: always()
+        run: |
+          {
+            echo "## Instagram setup check"
+            echo ""
+            echo '```'
+            cat ig-setup.txt 2>/dev/null || echo "(no output captured)"
+            echo '```'
+            echo ""
+            echo "If every line says OK, copy the \`IG_USER_ID\` above into a"
+            echo "repository secret alongside \`IG_ACCESS_TOKEN\`, then run the"
+            echo "**Weekly report** workflow to pull real Instagram data."
+          } >> "$GITHUB_STEP_SUMMARY"

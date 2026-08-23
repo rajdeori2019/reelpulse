@@ -69,7 +69,8 @@ class Collector:
     def get_json(self, url: str, params: dict | None = None, *,
                  headers: dict | None = None, retries: int = 3,
                  timeout: int = 20, cost: float = 1.0,
-                 service: str | None = None,
+                 service: str | None = None, key: str | None = None,
+                 also: str | None = None,
                  respect_reserve: bool = True) -> dict:
         """GET with quota accounting, adaptive throttling and honest retries.
 
@@ -77,6 +78,16 @@ class Collector:
         than calls: a search.list costs 100 and a videos.list costs 1. Charging
         every call as 1 would under-count spend by two orders of magnitude on
         exactly the endpoint most likely to exhaust the budget.
+
+        `key` names *what* was spent, for limits denominated in distinct things
+        rather than calls — Instagram's window allows 30 unique hashtags per 7
+        days however many times each is queried, so a repeat of a hashtag
+        already inside the window must be free rather than refused.
+
+        `also` charges a second, secondary budget for the same request. One
+        request can sit under two ceilings at once: a hashtag call consumes a
+        weekly hashtag slot *and* one of the app's 200 Graph calls per hour.
+        Booking only the tighter of the two leaves the other reading low.
         """
         service = service or self.service
         limit = limit_for(service)
@@ -85,14 +96,19 @@ class Collector:
         for attempt in range(retries):
             # Pre-flight. Raises rather than sending when it cannot be afforded;
             # both exceptions propagate to safe_collect().
-            self.limiter.acquire(service, cost, respect_reserve=respect_reserve)
+            self.limiter.acquire(service, cost, respect_reserve=respect_reserve,
+                                 key=key)
+            if also:
+                self.limiter.acquire(also, 1.0, respect_reserve=respect_reserve)
 
             try:
                 resp = self.session.get(url, params=params, headers=headers,
                                         timeout=timeout)
             except requests.RequestException as exc:
                 last_reason = f"{type(exc).__name__}: {exc}"
-                self.limiter.record(service, cost, url)
+                self.limiter.record(service, cost, url, key=key)
+                if also:
+                    self.limiter.record(also, 1.0, url)
                 if attempt == retries - 1:
                     break
                 self._sleep_backoff(attempt, service)
@@ -106,7 +122,10 @@ class Collector:
                     body = None
 
             rate_limited, retryable, reason = self.limiter.observe(
-                service, resp.status_code, resp.headers, body, cost, url)
+                service, resp.status_code, resp.headers, body, cost, url, key=key)
+            if also:
+                self.limiter.observe(also, resp.status_code, resp.headers,
+                                     body, 1.0, url)
             last_reason = reason
 
             if 200 <= resp.status_code < 300:

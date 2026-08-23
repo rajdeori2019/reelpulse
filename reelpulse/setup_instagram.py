@@ -19,6 +19,8 @@ from typing import Any
 
 import requests
 
+from .limits import QuotaExhausted, ServiceCoolingDown
+
 API = "https://graph.facebook.com/v23.0"
 TIMEOUT = 20
 
@@ -32,15 +34,35 @@ NEEDED = {
 }
 
 
-def _get(path: str, params: dict) -> tuple[bool, Any]:
+def _get(path: str, params: dict, *, limiter=None, service: str = "instagram_graph",
+         key: str | None = None) -> tuple[bool, Any]:
+    """Every call here is metered.
+
+    These six calls used to bypass the limiter entirely — small in volume, but a
+    hole in the accounting is a hole regardless of size, and the hashtag probe in
+    particular spends one of only thirty weekly slots.
+    """
+    if limiter is not None:
+        try:
+            limiter.acquire(service, 1.0, key=key)
+        except (QuotaExhausted, ServiceCoolingDown) as exc:
+            return False, {"error": {"message": str(exc), "code": "budget"}}
+
     try:
         resp = requests.get(f"{API}/{path}", params=params, timeout=TIMEOUT)
     except requests.RequestException as exc:
+        if limiter is not None:
+            limiter.record(service, 1.0, path, key=key)
         return False, {"error": {"message": f"network: {exc}"}}
+
     try:
         body = resp.json()
     except ValueError:
         body = {"error": {"message": f"non-JSON response ({resp.status_code})"}}
+
+    if limiter is not None:
+        limiter.observe(service, resp.status_code, resp.headers, body, 1.0, path,
+                        key=key)
     return resp.ok and "error" not in body, body
 
 
@@ -71,9 +93,10 @@ def _err(body: Any) -> str:
     return " ".join(parts)
 
 
-def check_token(token: str) -> dict[str, Any]:
+def check_token(token: str, limiter=None) -> dict[str, Any]:
     """Validity, expiry and granted scopes, via Meta's own debug endpoint."""
-    ok, body = _get("debug_token", {"input_token": token, "access_token": token})
+    ok, body = _get("debug_token", {"input_token": token, "access_token": token},
+                    limiter=limiter)
     if not ok:
         return {"ok": False, "detail": _err(body)}
 
@@ -92,7 +115,7 @@ def check_token(token: str) -> dict[str, Any]:
     }
 
 
-def find_accounts(token: str) -> dict[str, Any]:
+def find_accounts(token: str, limiter=None) -> dict[str, Any]:
     """Walk Pages -> linked Instagram professional account.
 
     This is where the Facebook-Login requirement bites: an Instagram account
@@ -101,7 +124,7 @@ def find_accounts(token: str) -> dict[str, Any]:
     """
     ok, body = _get("me/accounts", {
         "fields": "name,id,instagram_business_account{id,username,followers_count}",
-        "access_token": token, "limit": 50})
+        "access_token": token, "limit": 50}, limiter=limiter)
     if not ok:
         return {"ok": False, "detail": _err(body), "accounts": []}
 
@@ -127,15 +150,18 @@ def find_accounts(token: str) -> dict[str, Any]:
 
 
 def check_hashtag_search(token: str, ig_user_id: str,
-                         probe: str = "reels") -> dict[str, Any]:
+                         probe: str = "reels", limiter=None) -> dict[str, Any]:
     """The capability the whole project depends on.
 
     Spends one of the 30-per-7-days hashtag slots, which is why the probe uses a
     hashtag the default config already queries — so verification costs a slot
     the weekly run was going to spend anyway.
     """
+    # Metered against the 30-per-7-days hashtag budget, keyed by the tag so a
+    # repeat probe of an already-spent tag costs nothing.
     ok, body = _get("ig_hashtag_search",
-                    {"user_id": ig_user_id, "q": probe, "access_token": token})
+                    {"user_id": ig_user_id, "q": probe, "access_token": token},
+                    limiter=limiter, service="instagram_hashtags", key=probe)
     if not ok:
         return {"ok": False, "detail": _err(body)}
     items = body.get("data") or []
@@ -145,7 +171,7 @@ def check_hashtag_search(token: str, ig_user_id: str,
     hashtag_id = items[0]["id"]
     ok2, body2 = _get(f"{hashtag_id}/top_media", {
         "user_id": ig_user_id, "fields": "id,like_count,media_type",
-        "limit": 3, "access_token": token})
+        "limit": 3, "access_token": token}, limiter=limiter)
     if not ok2:
         return {"ok": False, "detail": f"resolved #{probe} but top_media failed: "
                                        f"{_err(body2)}"}
@@ -154,11 +180,12 @@ def check_hashtag_search(token: str, ig_user_id: str,
 
 
 def check_business_discovery(token: str, ig_user_id: str,
-                             probe: str = "natgeo") -> dict[str, Any]:
+                             probe: str = "natgeo", limiter=None) -> dict[str, Any]:
     """The only free route to view counts on other people's reels."""
     field = (f"business_discovery.username({probe})"
              "{username,followers_count,media.limit(2){id,media_type,view_count}}")
-    ok, body = _get(ig_user_id, {"fields": field, "access_token": token})
+    ok, body = _get(ig_user_id, {"fields": field, "access_token": token},
+                    limiter=limiter)
     if not ok:
         return {"ok": False, "detail": _err(body)}
 
@@ -170,10 +197,10 @@ def check_business_discovery(token: str, ig_user_id: str,
                       f"{len(media)} media, {with_views} with view_count"}
 
 
-def check_own_insights(token: str, ig_user_id: str) -> dict[str, Any]:
+def check_own_insights(token: str, ig_user_id: str, limiter=None) -> dict[str, Any]:
     ok, body = _get(f"{ig_user_id}/media",
                     {"fields": "id,media_product_type", "limit": 5,
-                     "access_token": token})
+                     "access_token": token}, limiter=limiter)
     if not ok:
         return {"ok": False, "detail": _err(body)}
     media = body.get("data", [])
@@ -184,14 +211,14 @@ def check_own_insights(token: str, ig_user_id: str) -> dict[str, Any]:
 
 
 def run_all(token: str, ig_user_id: str | None = None,
-            hashtag_probe: str = "reels") -> dict[str, Any]:
+            hashtag_probe: str = "reels", limiter=None) -> dict[str, Any]:
     """Full diagnosis. Stops early only when continuing cannot work."""
-    results: dict[str, Any] = {"token": check_token(token)}
+    results: dict[str, Any] = {"token": check_token(token, limiter)}
     if not results["token"]["ok"]:
         results["fatal"] = "token invalid or expired"
         return results
 
-    results["accounts"] = find_accounts(token)
+    results["accounts"] = find_accounts(token, limiter)
     if not ig_user_id:
         linked = results["accounts"].get("linked") or []
         ig_user_id = linked[0]["ig_user_id"] if linked else None
@@ -202,7 +229,9 @@ def run_all(token: str, ig_user_id: str | None = None,
                             "Facebook Page this token can see")
         return results
 
-    results["hashtag_search"] = check_hashtag_search(token, ig_user_id, hashtag_probe)
-    results["business_discovery"] = check_business_discovery(token, ig_user_id)
-    results["own_insights"] = check_own_insights(token, ig_user_id)
+    results["hashtag_search"] = check_hashtag_search(token, ig_user_id,
+                                                     hashtag_probe, limiter)
+    results["business_discovery"] = check_business_discovery(token, ig_user_id,
+                                                             limiter=limiter)
+    results["own_insights"] = check_own_insights(token, ig_user_id, limiter)
     return results

@@ -36,6 +36,11 @@ class RedditCollector(Collector):
         cid, secret = env("REDDIT_CLIENT_ID"), env("REDDIT_CLIENT_SECRET")
         if not cid or not secret or cid.startswith("your_"):
             return None
+        # The token exchange is a real Reddit request and counts against the
+        # same per-minute budget as everything else. It used to bypass the
+        # limiter, which meant a tight retry loop could hammer the auth endpoint
+        # — the request most likely to get an app blocked.
+        self.limiter.acquire(self.service, 1.0)
         resp = requests.post(
             "https://www.reddit.com/api/v1/access_token",
             auth=(cid, secret),
@@ -43,8 +48,15 @@ class RedditCollector(Collector):
             headers={"User-Agent": USER_AGENT},
             timeout=20,
         )
+        body = {}
+        try:
+            body = resp.json()
+        except ValueError:
+            pass
+        self.limiter.observe(self.service, resp.status_code, resp.headers,
+                             body, 1.0, "access_token")
         resp.raise_for_status()
-        return resp.json().get("access_token")
+        return body.get("access_token")
 
     def search(self, query: str, *, time_filter: str = "week",
                limit: int = 100) -> list[Candidate]:

@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .pytest_cache/
 data/reelpulse.db
+# data/api_ledger.json is deliberately NOT ignored: it is the
+# only copy of the rate-limit ledger that survives a cache eviction.

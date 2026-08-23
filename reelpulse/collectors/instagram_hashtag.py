@@ -27,6 +27,7 @@ import logging
 from datetime import datetime, timedelta, timezone
 
 from ..config import env
+from ..limits import limit_for
 from ..models import Candidate
 from .base import Collector
 
@@ -37,20 +38,33 @@ API = "https://graph.facebook.com/v23.0"
 MEDIA_FIELDS = ("id,caption,media_type,media_url,permalink,timestamp,"
                 "like_count,comments_count,children{media_type,media_url}")
 
-WINDOW_DAYS = 7
-MAX_UNIQUE_HASHTAGS = 30
+# Read off the limit table rather than restated here: two copies of the same
+# number is one edit away from disagreeing, and the disagreement would only
+# show up as a hard rejection from Meta a week later.
+_HASHTAG_LIMIT = limit_for("instagram_hashtags")
+WINDOW_DAYS = _HASHTAG_LIMIT.quota_window_s // 86_400
+MAX_UNIQUE_HASHTAGS = _HASHTAG_LIMIT.quota
 
 
 class HashtagBudget:
-    """Tracks the rolling 30-per-7-days hashtag allowance.
+    """The rolling 30-per-7-days hashtag allowance, plus the hashtag-id cache.
 
     Persisted, because the window is enforced by Meta across *all* your calls,
     not per process. An in-memory counter would reset every run and walk you
     straight into a hard rejection.
+
+    When a limiter is supplied it is the authority on what has been spent, and
+    this class is only the id cache and the planner. Two ledgers counting the
+    same window is how they drift apart: whichever one a caller happens to read
+    is the one that decides, and the other quietly rots. The `hashtag_budget`
+    table remains the fallback for a store with no limiter attached.
     """
 
-    def __init__(self, store) -> None:
+    SERVICE = "instagram_hashtags"
+
+    def __init__(self, store, limiter=None) -> None:
         self.store = store
+        self.limiter = limiter
         store.conn.execute("""
             CREATE TABLE IF NOT EXISTS hashtag_budget (
                 hashtag    TEXT NOT NULL,
@@ -64,6 +78,8 @@ class HashtagBudget:
         return (datetime.now(timezone.utc) - timedelta(days=WINDOW_DAYS)).isoformat()
 
     def spent(self) -> set[str]:
+        if self.limiter is not None:
+            return self.limiter.spent_keys(self.SERVICE)
         cur = self.store.conn.execute(
             "SELECT DISTINCT hashtag FROM hashtag_budget WHERE queried_at >= ?",
             (self._cutoff(),))
@@ -112,7 +128,8 @@ class InstagramHashtagCollector(Collector):
 
     def __init__(self, config: dict, store=None, limiter=None) -> None:
         super().__init__(config, limiter)
-        self.budget = HashtagBudget(store) if store is not None else None
+        self.budget = (HashtagBudget(store, self.limiter)
+                       if store is not None else None)
 
     def collect(self) -> list[Candidate]:
         return self.discover(self.config.get("hashtags", []))
@@ -122,9 +139,14 @@ class InstagramHashtagCollector(Collector):
             cached = self.budget.cached_id(hashtag)
             if cached:
                 return cached
+        # Charged to the weekly hashtag window keyed by the tag, and to the
+        # hourly Graph budget as one call. Meta enforces both; a request that
+        # only appears in one ledger makes the other read low.
         data = self.get_json(f"{API}/ig_hashtag_search",
                              params={"user_id": user_id, "q": hashtag,
-                                     "access_token": token}, retries=2)
+                                     "access_token": token}, retries=2,
+                             service="instagram_hashtags", key=hashtag,
+                             also="instagram_graph")
         items = data.get("data") or []
         return items[0]["id"] if items else None
 
@@ -168,10 +190,16 @@ class InstagramHashtagCollector(Collector):
                 self.budget.record(hashtag, hashtag_id)
 
             try:
+                # Also keyed by the hashtag. A cached id lets us skip the
+                # resolve call, but Meta still counts this tag against the
+                # window — so the slot has to be booked here too. Distinct
+                # counting makes the pair cost one slot, not two.
                 data = self.get_json(
                     f"{API}/{hashtag_id}/{edge}",
                     params={"user_id": user_id, "fields": MEDIA_FIELDS,
-                            "limit": limit, "access_token": token}, retries=2)
+                            "limit": limit, "access_token": token}, retries=2,
+                    service="instagram_hashtags", key=hashtag,
+                    also="instagram_graph")
             except Exception as exc:  # noqa: BLE001
                 log.warning("[instagram_hashtag] #%s %s failed (%s)", hashtag, edge, exc)
                 continue

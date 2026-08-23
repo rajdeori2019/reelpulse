@@ -71,7 +71,8 @@ CREATE TABLE IF NOT EXISTS api_spend (
     service   TEXT NOT NULL,
     ts        TEXT NOT NULL,
     cost      REAL NOT NULL,
-    endpoint  TEXT
+    endpoint  TEXT,
+    key       TEXT          -- what was spent, for distinct-counted limits
 );
 CREATE INDEX IF NOT EXISTS idx_spend ON api_spend(service, ts);
 
