@@ -820,7 +820,21 @@
    "key": null,
    "service": "instagram_graph",
    "ts": "2026-08-23T08:03:16.589530+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "debug_token",
+   "key": null,
+   "service": "instagram_graph",
+   "ts": "2026-08-23T09:03:47.477681+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "me/accounts",
+   "key": null,
+   "service": "instagram_graph",
+   "ts": "2026-08-23T09:03:47.990741+00:00"
   }
  ],
- "written_at": "2026-08-23T08:03:17.702168+00:00"
+ "written_at": "2026-08-23T09:03:49.390041+00:00"
 }
