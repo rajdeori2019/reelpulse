@@ -343,25 +343,10 @@ class RateLimiter:
         self._slowdown: dict[str, float] = {}
 
         if store is not None:
+            # Store owns the schema and its migrations. The limiter only
+            # ensures the tables exist for a store that predates them.
             store.conn.executescript(self.SCHEMA)
-            self._migrate(store)
             store.conn.commit()
-
-    @staticmethod
-    def _migrate(store) -> None:
-        """Add columns a database created by an older version is missing.
-
-        `CREATE TABLE IF NOT EXISTS` does nothing to a table that already
-        exists, so a ledger restored from a cache written before distinct
-        counting has no `key` column and every insert fails. That is a hard
-        crash on the first real call of the run, in the one component whose
-        whole job is to keep runs from failing.
-        """
-        have = {row[1] for row in
-                store.conn.execute("PRAGMA table_info(api_spend)")}
-        if "key" not in have:
-            store.conn.execute("ALTER TABLE api_spend ADD COLUMN key TEXT")
-            log.info("[limits] migrated api_spend: added the key column")
 
     # ---- ledger ------------------------------------------------------
 

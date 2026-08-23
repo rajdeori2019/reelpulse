@@ -7,12 +7,15 @@ merely has a big lifetime number.
 from __future__ import annotations
 
 import json
+import logging
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Iterable
 
 from .models import Candidate
+
+log = logging.getLogger("reelpulse")
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS candidates (
@@ -121,7 +124,29 @@ class Store:
         self.conn = sqlite3.connect(self.path)
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
+        self._migrate()
         self.conn.commit()
+
+    # A column added to SCHEMA reaches a new database and no existing one:
+    # CREATE TABLE IF NOT EXISTS does nothing to a table that is already there.
+    # On CI the database arrives from a cache written by an older release, so
+    # every migration here runs against a real user's data on the next run —
+    # which is why they are additive only, and why this lives in Store rather
+    # than in whichever component happens to need the column. `ledger import`
+    # opens the store and nothing else; a migration parked in RateLimiter would
+    # never have run before the first query that needed it.
+    MIGRATIONS = [
+        ("api_spend", "key", "TEXT"),
+    ]
+
+    def _migrate(self) -> None:
+        for table, column, decl in self.MIGRATIONS:
+            have = {row[1] for row in
+                    self.conn.execute(f"PRAGMA table_info({table})")}
+            if have and column not in have:
+                self.conn.execute(
+                    f"ALTER TABLE {table} ADD COLUMN {column} {decl}")
+                log.info("[db] migrated %s: added %s", table, column)
 
     # ---- writes --------------------------------------------------------
 

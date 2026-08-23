@@ -360,25 +360,26 @@ def test_distinct_keys_age_out_of_the_window():
 
 
 def test_a_database_from_an_older_version_is_migrated_not_crashed():
-    """The cached ledger on CI predates distinct counting. Without a migration
-    every insert fails on the first real call of the run — a hard crash in the
-    one component whose job is to stop runs from failing."""
+    """The cached ledger on CI predates distinct counting, so it has no `key`
+    column and every insert against it fails. The migration has to run when the
+    store is *opened*, because `ledger import` — the first command every
+    workflow runs — opens the store and constructs nothing else."""
+    import sqlite3
     import tempfile
     from pathlib import Path
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "old.db"
-        store = Store(path)
-        # The pre-distinct schema, exactly as an older release wrote it.
-        store.conn.execute("DROP TABLE IF EXISTS api_spend")
-        store.conn.execute(
-            "CREATE TABLE api_spend (service TEXT NOT NULL, ts TEXT NOT NULL, "
-            "cost REAL NOT NULL, endpoint TEXT)")
-        store.conn.execute(
-            "INSERT INTO api_spend VALUES ('youtube', ?, 100.0, 'search.list')",
-            (datetime.now(timezone.utc).isoformat(),))
-        store.conn.commit()
 
-        lim = RateLimiter(store)                       # migrates on construction
+        raw = sqlite3.connect(path)        # the pre-distinct schema, verbatim
+        raw.execute("CREATE TABLE api_spend (service TEXT NOT NULL, ts TEXT "
+                    "NOT NULL, cost REAL NOT NULL, endpoint TEXT)")
+        raw.execute("INSERT INTO api_spend VALUES ('youtube', ?, 100.0, 'x')",
+                    (datetime.now(timezone.utc).isoformat(),))
+        raw.commit()
+        raw.close()
+
+        store = Store(path)                # migrates on open
+        lim = RateLimiter(store)
         lim.record("instagram_hashtags", 1.0, "x", key="reels")
 
         assert lim.spent("youtube") == 100.0, "existing spend was lost"

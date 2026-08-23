@@ -204,3 +204,37 @@ def test_rows_older_than_every_window_are_dropped(workspace):
     keys = {r.get("key") for r in json.loads(ledger.read_text())["spend"]}
     assert "old" not in keys
     store.close()
+
+
+def test_a_ledger_import_migrates_a_database_from_the_old_release(workspace):
+    """This is the crash that would have hit the very next CI run.
+
+    The cache holds a database written before distinct counting, so it has no
+    `key` column. `ledger import` is the first command every workflow runs and
+    it opens the store and nothing else — so the migration has to live in the
+    store, not in the limiter that later happens to need the column.
+    """
+    import sqlite3
+    db, ledger = workspace / "old.db", workspace / "led.json"
+
+    raw = sqlite3.connect(db)          # the pre-distinct schema, verbatim
+    raw.execute("CREATE TABLE api_spend (service TEXT NOT NULL, ts TEXT NOT "
+                "NULL, cost REAL NOT NULL, endpoint TEXT)")
+    raw.execute("INSERT INTO api_spend VALUES ('youtube', ?, 100.0, 'search')",
+                (datetime.now(timezone.utc).isoformat(),))
+    raw.commit()
+    raw.close()
+
+    ledger.write_text(json.dumps({
+        "format": 1, "written_at": datetime.now(timezone.utc).isoformat(),
+        "spend": [{"service": "instagram_hashtags",
+                   "ts": datetime.now(timezone.utc).isoformat(),
+                   "cost": 1.0, "endpoint": "x", "key": "reels"}],
+        "cooldowns": []}))
+
+    store = Store(db)                  # migrates on open
+    import_ledger(store, ledger)
+    lim = RateLimiter(store)
+    assert lim.spent("youtube") == 100.0, "pre-existing spend was lost"
+    assert lim.spent_keys("instagram_hashtags") == {"reels"}
+    store.close()

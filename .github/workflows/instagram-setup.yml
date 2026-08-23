@@ -72,15 +72,25 @@ jobs:
         # always(), because the probe may have spent its hashtag slot before a
         # later check failed. A slot spent and not recorded is a slot the
         # weekly run will try to spend again.
+        #
+        # Nothing here may fail the job. This workflow exists to *tell you*
+        # what is wrong with your token, and a red run over a bookkeeping
+        # commit would hide the diagnosis behind an unrelated error. The cache
+        # still carries the spend either way; the commit is the belt-and-braces
+        # copy, so it is allowed to lose a race and give up.
+        continue-on-error: true
         run: |
-          python -m reelpulse ledger export
+          python -m reelpulse ledger export || exit 0
           git config user.name  "reelpulse-bot"
           git config user.email "actions@github.com"
           git add -A data/api_ledger.json
-          git diff --staged --quiet || {
+          if ! git diff --staged --quiet; then
             git commit -m "ledger: instagram setup probe"
-            git pull --rebase --autostash && git push
-          }
+            # Shallow checkout, so a rebase can legitimately fail. Try, and
+            # accept losing the commit rather than losing the run.
+            git pull --rebase --autostash || true
+            git push || echo "could not push the ledger; the cache still has it"
+          fi
 
       # The whole point is reading the result without digging through log
       # viewers, so it goes straight onto the run summary page.
