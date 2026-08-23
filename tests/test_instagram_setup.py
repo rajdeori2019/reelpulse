@@ -227,3 +227,61 @@ def test_a_network_failure_still_costs_its_slot(monkeypatch):
 ])
 def test_error_codes_carry_actionable_hints(code, fragment):
     assert fragment in si._err({"error": {"message": "x", "code": code}})
+
+
+def test_the_unlinked_hint_does_not_send_people_to_accounts_centre():
+    """Accounts Centre links Instagram to a personal *account*. The Graph API
+    cannot see that link at all — only a connection to a specific Page produces
+    `instagram_business_account`. An earlier version of this hint named
+    Accounts Centre as the fix, which sends people to do the wrong thing and
+    then wonder why nothing changed."""
+    import re
+    from pathlib import Path
+    source = (Path(__file__).resolve().parent.parent
+              / "reelpulse" / "cli.py").read_text(encoding="utf-8")
+    block = source[source.index("No Instagram professional account linked"):]
+    block = block[:block.index("if results.get(\"fatal\")")]
+
+    assert "Linked accounts" in block, "the working path is not named"
+    assert "Public business information" in block, "the app path is not named"
+    # Accounts Centre may be named, but only as the thing NOT to do.
+    for match in re.finditer(r"Accounts Centre", block):
+        context = block[max(0, match.start() - 200):match.end() + 80]
+        assert "WRONG" in context, "Accounts Centre is presented as a fix"
+
+
+def test_the_newer_connected_field_is_accepted_as_a_link(monkeypatch):
+    """Meta's newer in-app flow populates `connected_instagram_account` and
+    leaves `instagram_business_account` empty. Asking for only the documented
+    field makes a Page that IS linked report as unlinked, which sends people
+    off to re-do a connection that already exists."""
+    monkeypatch.setattr(si, "_get", lambda p, q, **kw: (True, {"data": [
+        {"name": "Prafulla Deori", "id": "1",
+         "connected_instagram_account": {"id": "IG99", "username": "iamprafz",
+                                         "followers_count": 4_200}}]}))
+    result = si.find_accounts("t")
+    assert result["ok"] is True
+    assert result["linked"][0]["ig_user_id"] == "IG99"
+    assert result["linked"][0]["via"] == "connected_instagram_account"
+
+
+def test_the_documented_field_wins_when_both_are_present(monkeypatch):
+    monkeypatch.setattr(si, "_get", lambda p, q, **kw: (True, {"data": [
+        {"name": "P", "id": "1",
+         "instagram_business_account": {"id": "BIZ", "username": "a"},
+         "connected_instagram_account": {"id": "CON", "username": "a"}}]}))
+    result = si.find_accounts("t")
+    assert result["linked"][0]["ig_user_id"] == "BIZ"
+    assert result["linked"][0]["via"] == "instagram_business_account"
+
+
+def test_an_unlinked_page_reports_which_fields_were_empty(monkeypatch):
+    """'3 Pages, none linked' is not a diagnosis. Which field Meta left empty
+    is the diagnosis."""
+    monkeypatch.setattr(si, "_get", lambda p, q, **kw: (True, {"data": [
+        {"name": "Page A", "id": "1"}]}))
+    result = si.find_accounts("t")
+    acct = result["accounts"][0]
+    assert acct["has_business_field"] is False
+    assert acct["has_connected_field"] is False
+    assert acct["via"] is None

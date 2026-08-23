@@ -122,21 +122,44 @@ def find_accounts(token: str, limiter=None) -> dict[str, Any]:
     with no Page attached returns an empty list here, and every downstream call
     then fails with a permissions-shaped error that never mentions the Page.
     """
+    # Two different fields can hold the answer, and asking for only one is how
+    # a Page that IS linked reports as unlinked:
+    #
+    #   instagram_business_account   the classic Business-account link
+    #   connected_instagram_account  the link Meta's newer in-app flow creates
+    #
+    # Which one gets populated depends on how the connection was made and on
+    # whether the account is Business or Creator. Meta's docs do not spell out
+    # the rule, so this asks for both and reports what actually came back
+    # rather than assuming.
     ok, body = _get("me/accounts", {
-        "fields": "name,id,instagram_business_account{id,username,followers_count}",
+        "fields": ("name,id,"
+                   "instagram_business_account{id,username,followers_count},"
+                   "connected_instagram_account{id,username,followers_count}"),
         "access_token": token, "limit": 50}, limiter=limiter)
     if not ok:
         return {"ok": False, "detail": _err(body), "accounts": []}
 
     accounts = []
     for page in body.get("data", []):
-        ig = page.get("instagram_business_account")
+        business = page.get("instagram_business_account") or {}
+        connected = page.get("connected_instagram_account") or {}
+        # Prefer the documented field, fall back to the newer one. Both are IG
+        # User ids and both work for Hashtag Search; only their provenance
+        # differs.
+        ig = business or connected
         accounts.append({
             "page": page.get("name"),
             "page_id": page.get("id"),
-            "ig_user_id": (ig or {}).get("id"),
-            "ig_username": (ig or {}).get("username"),
-            "followers": (ig or {}).get("followers_count"),
+            "ig_user_id": ig.get("id"),
+            "ig_username": ig.get("username"),
+            "followers": ig.get("followers_count"),
+            # Kept separate so the report can say which field answered — the
+            # difference is the whole diagnosis when one is empty.
+            "via": ("instagram_business_account" if business
+                    else "connected_instagram_account" if connected else None),
+            "has_business_field": bool(business),
+            "has_connected_field": bool(connected),
         })
     linked = [a for a in accounts if a["ig_user_id"]]
     return {

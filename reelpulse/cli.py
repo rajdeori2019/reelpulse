@@ -597,11 +597,46 @@ def instagram_setup(ctx: click.Context, token: str | None,
             followers = acct.get("followers") or 0
             click.echo(f"       @{acct['ig_username']} (id {acct['ig_user_id']}) "
                        f"via Page '{acct['page']}' — {followers:,} followers")
+            if acct.get("via") == "connected_instagram_account":
+                click.echo("       (found via connected_instagram_account, not "
+                           "instagram_business_account —\n        the newer "
+                           "in-app link. Same id, works the same.)")
     else:
         click.echo("[FAIL] No Instagram professional account linked to a Facebook Page")
         click.echo(f"       {accounts.get('detail', '')}")
-        click.echo("       Hashtag Search REQUIRES this link. Instagram app -> "
-                   "Settings ->\n       Accounts Centre -> link a Facebook Page.")
+
+        # Naming the Pages matters when there are several: the link has to be
+        # made on one specific Page, and "3 Pages found" does not say which.
+        # Print what Meta returned per Page, per field. When a Page you know is
+        # linked reports as unlinked, the useful question is not "is it linked"
+        # but "which field did Meta leave empty" — and that is only answerable
+        # by showing both.
+        click.echo("       Page                            business  connected")
+        for acct in accounts.get("accounts", []):
+            name = (acct.get("page") or "?")[:30]
+            biz = "yes" if acct.get("has_business_field") else "--"
+            con = "yes" if acct.get("has_connected_field") else "--"
+            click.echo(f"       {name:<32}{biz:<10}{con}")
+
+        click.echo("""
+       Hashtag Search REQUIRES this link, and there are two different
+       things called "linking your Instagram to Facebook". Only one of
+       them creates it.
+
+         WRONG  Accounts Centre / "Facebook: <your name>" on your profile.
+                That links your Instagram to your personal *account*. It
+                enables cross-posting and shared login, and the Graph API
+                cannot see it at all.
+
+         RIGHT  A connection to a specific *Page*. Either:
+                  Facebook Page -> Settings -> Linked accounts ->
+                    Instagram -> Connect account
+                or
+                  Instagram app -> Edit profile ->
+                    Public business information -> Page -> pick the Page
+
+       If your Instagram profile shows a person's name next to Facebook
+       rather than a Page name, you have the wrong one.""")
 
     if results.get("fatal"):
         click.echo(f"\nBlocked: {results['fatal']}\n")
