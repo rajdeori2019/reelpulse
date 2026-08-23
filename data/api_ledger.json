@@ -806,7 +806,21 @@
    "key": null,
    "service": "youtube",
    "ts": "2026-08-23T07:31:00.973434+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "debug_token",
+   "key": null,
+   "service": "instagram_graph",
+   "ts": "2026-08-23T08:03:15.974736+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "me/accounts",
+   "key": null,
+   "service": "instagram_graph",
+   "ts": "2026-08-23T08:03:16.589530+00:00"
   }
  ],
- "written_at": "2026-08-23T07:31:02.494497+00:00"
+ "written_at": "2026-08-23T08:03:17.702168+00:00"
 }
