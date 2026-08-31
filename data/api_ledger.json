@@ -1,5 +1,12 @@
 {
- "cooldowns": [],
+ "cooldowns": [
+  {
+   "failures": 5,
+   "reason": "5 consecutive non-retryable failures (http 404)",
+   "service": "wikimedia",
+   "until": "2026-08-31T12:47:00.108332+00:00"
+  }
+ ],
  "format": 1,
  "spend": [
   {
@@ -2640,7 +2647,644 @@
    "key": null,
    "service": "youtube",
    "ts": "2026-08-30T12:34:41.510811+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:23.167971+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:23.646948+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:24.050213+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:24.560469+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:24.939192+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:25.367063+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:25.792220+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:26.245988+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:26.664121+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:27.108559+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:27.511847+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:27.911104+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:28.396450+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:28.931106+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:29.342549+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:29.736621+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:30.116729+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:30.479259+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:30.890520+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:31.304520+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:31.747830+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:32.183644+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:32.511291+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:32.886573+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:34.970513+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:35.242183+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:35.527631+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:35.916144+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:36.899456+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:38.009482+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-08-31T12:36:38.907251+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Raksha_Bandhan/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.138558+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Principal/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.171797+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Student/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.195906+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/School_Story/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.215780+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Makeup/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.247328+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Tricks/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.272006+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Magic/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.293309+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Cellephane/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.304729+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Namoh/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.315449+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Description/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.343876+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Don/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.368650+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/shortsfeed/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.388823+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/ytshorts/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.402777+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/youtubeshorts/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.421434+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/New_Trending_Kalyani/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.436656+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Song/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.464630+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Kalyani_\n\nEdit/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.480484+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Amaira/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.495987+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Bmv/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.513818+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Wait/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.545704+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Men/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.571699+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/targetfinds/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.585603+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/protein/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.605497+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/faimelybond/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.624625+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Bagal_Wala_Kabutar/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.636329+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Ghar/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:39.719270+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Samp_Chhod_Diya/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:40.299782+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/funny/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:40.902463+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/comedy/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:41.505179+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/bachpan/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:42.099980+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Reverse/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:43.505894+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Khun_Main_Pumping/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:43.520178+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Radha_Krishna/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:43.911804+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Kaalamaagi_Chusina_Song/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:44.510689+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Peace/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:45.111645+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/rells/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:45.700382+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/desiviilagelifetstyle/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:46.299212+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/shortvideo/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:46.900146+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/reelsinstagram/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:47.507753+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Pani/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:48.130426+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Pagalpanti/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:48.923990+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Chocolate/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:49.304835+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Kamine/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:49.904229+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Atrocity/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:50.512536+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Final_Twist/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:51.104897+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Comedy/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:51.714085+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/keralaskater/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:52.299417+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Eid/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:52.912190+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/panamatta/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:53.507321+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/trending/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:54.102074+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Crazy/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:54.705123+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Tom/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:55.316379+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Jerry/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:55.919618+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Haircut/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:56.511778+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Long/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:57.112066+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Abhishek_Harswal/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:57.699804+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/New_Trending/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:58.300473+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/khilona/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:58.908095+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/nariyal/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:36:59.503911+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/foryou/daily/20260817/20260830",
+   "key": null,
+   "service": "wikimedia",
+   "ts": "2026-08-31T12:37:00.105852+00:00"
   }
  ],
- "written_at": "2026-08-30T12:34:42.572916+00:00"
+ "written_at": "2026-08-31T12:37:02.126505+00:00"
 }
