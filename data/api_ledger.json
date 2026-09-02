@@ -7,524 +7,6 @@
    "endpoint": "https://www.googleapis.com/youtube/v3/search",
    "key": null,
    "service": "youtube",
-   "ts": "2026-08-24T06:51:29.876353+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:30.249157+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:30.581209+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:30.975120+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:31.379399+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:31.698727+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:31.990547+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:32.342344+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:32.688500+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:33.124944+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:33.462195+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:33.916834+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:34.234223+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:34.548993+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:34.820036+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:35.192295+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:35.493183+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:35.940097+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:36.398036+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:36.723612+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:37.024227+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:37.500131+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:37.891143+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:38.873183+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:39.857653+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:40.745050+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:41.825632+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:42.839579+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T06:51:43.766852+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Bandhan_Dilo/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.227296+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Bandhan/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.355768+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Raksha_Bandhan/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.749793+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Viral_Songs/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.835948+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Instagram_Trending_Hits/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.912222+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Instagram_Trending/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:44.990766+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Dia/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.074247+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Instagram/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.151749+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Jab/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.243397+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/End/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.328852+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Shorts_Top/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.534447+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Instagram_Marathi_Comedy/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.609282+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Marathi_Funny_Videos/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.697598+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Daily_Marathi_Quotes/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.773298+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/marathi/daily/20260810/20260823",
-   "key": null,
-   "service": "wikimedia",
-   "ts": "2026-08-24T06:51:45.862148+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:25.748541+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:26.140846+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:26.442940+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:26.961350+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:27.282281+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:27.783381+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:28.151969+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:28.515195+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:28.880425+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:29.227922+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:29.608697+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:29.957271+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:30.248112+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:30.605863+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:30.995254+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:31.444673+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:31.817232+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:32.177645+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:32.645563+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:33.002022+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:33.351292+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:33.791807+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:34.299124+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:34.682301+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:35.522119+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:36.527673+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:37.522804+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:38.477892+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:39.474106+00:00"
-  },
-  {
-   "cost": 1.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
-   "key": null,
-   "service": "youtube",
-   "ts": "2026-08-24T07:55:40.398576+00:00"
-  },
-  {
-   "cost": 100.0,
-   "endpoint": "https://www.googleapis.com/youtube/v3/search",
-   "key": null,
-   "service": "youtube",
    "ts": "2026-08-25T07:41:04.595885+00:00"
   },
   {
@@ -2878,7 +2360,224 @@
    "key": null,
    "service": "youtube",
    "ts": "2026-09-01T12:19:47.424257+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:29.059579+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:29.513807+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:29.853224+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:30.223723+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:30.646757+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:31.090416+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:31.511984+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:31.956259+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:32.427530+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:32.922473+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:33.299773+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:33.739197+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:34.056605+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:34.424674+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:34.759780+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:35.117458+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:35.501614+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:35.875087+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:36.136023+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:36.510267+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:36.828181+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:37.289955+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:37.654086+00:00"
+  },
+  {
+   "cost": 100.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/search",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:37.959893+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:38.837798+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:39.867673+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:40.863098+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:41.916855+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:42.980513+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:43.893902+00:00"
+  },
+  {
+   "cost": 1.0,
+   "endpoint": "https://www.googleapis.com/youtube/v3/videos",
+   "key": null,
+   "service": "youtube",
+   "ts": "2026-09-02T11:56:44.841724+00:00"
   }
  ],
- "written_at": "2026-09-01T12:19:48.874258+00:00"
+ "written_at": "2026-09-02T11:56:46.234884+00:00"
 }
