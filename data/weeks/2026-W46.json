@@ -1,0 +1,1519 @@
+{
+  "generated_at": "2026-11-09T15:04:27.256768+00:00",
+  "week": "2026-W46",
+  "methodology": {
+    "headline": "Estimated ranking. Reels are discovered natively on Instagram via Hashtag Search and Business Discovery, and supplemented with YouTube Shorts cross-posts where a view count is only available there. Rows are ranked on whichever metric Instagram actually publishes for them — views, or likes and comments — with each basis standardised against its own cohort.",
+    "not_claimed": "This is not Meta's internal ranking and does not reproduce it. No Instagram scraping is performed, and no view count is ever estimated from likes.",
+    "sources": [
+      "Instagram Hashtag Search (Graph API)",
+      "Instagram Business Discovery (Graph API)",
+      "Instagram Graph API (own account)",
+      "Instagram oEmbed (tokenless)",
+      "YouTube Data API v3",
+      "Reddit API",
+      "Wikimedia Pageviews API"
+    ]
+  },
+  "stats": {
+    "candidates": 266,
+    "clusters": 223,
+    "with_view_counts": 223,
+    "instagram_permalinks": 0,
+    "platforms": [
+      "youtube"
+    ]
+  },
+  "reach": {
+    "verdict": "unrated",
+    "anchored": false,
+    "best_tier": "unrated",
+    "best_scale": 63855026.0,
+    "tiers": {
+      "unrated": 10
+    },
+    "headline": "No stored history to compare against, so these results cannot be placed on a scale. 10 of 10 clear a basic floor of 5,000."
+  },
+  "top": [
+    {
+      "cluster_id": "a903991ee1cc9291",
+      "rank": 1,
+      "vvs": 8.9562,
+      "title": "Diwali special❤️😱🙌🏻(part-4)|SimranMakhija| #shorts #school #Diwali #viral #fyp #yt #trending",
+      "creator": "Simran Makhija",
+      "published_at": "2026-11-07T00:30:00+00:00",
+      "duration_s": 58.0,
+      "views": 38600682,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 529097,
+      "comments": 908,
+      "shares": 0,
+      "views_per_hour": 616900.3,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/8e9HjxxEDmk"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/6PfmL60kjF8/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 58.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Simran Makhija",
+        "has_instagram_mirror": false,
+        "caption_words": 6,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 0,
+        "hashtag_bucket": "tags_0",
+        "emoji_count": 1,
+        "has_emoji": true,
+        "has_question": true,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Diwali",
+          "Mam"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 1.846,
+        "velocity": 2.297,
+        "acceleration": 0.725,
+        "breadth": 0.0,
+        "engagement_quality": -0.218,
+        "share_ratio": 0.0,
+        "topic_momentum": 3.236,
+        "recency": 2.019
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+3.67)",
+        "boosted by sheer view count (+1.85)",
+        "boosted by it rode a topic that was spiking globally (+1.46)",
+        "boosted by posted very recently in the window (+1.21)"
+      ],
+      "why_it_worked": [
+        "58s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"Diwali special❤️😱🙌🏻(part-4)|SimranMakhija|\"",
+        "Topic momentum was rising the same week (Diwali, Mam) — this reel caught a wave rather than starting one, so the format may not transfer to a cold topic.",
+        "Zero hashtags — distribution came from the ranker, not from tags.",
+        "[strong] comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+          "lift": 1.119671717171717,
+          "n": 360,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "ba6127ec0dbb2b3a",
+      "rank": 2,
+      "vvs": 6.1358,
+      "title": "Diwali ke patakhe 😱😂 #shorts #minivlog #familyvlog #dailyvlog #trending",
+      "creator": "Parvez Family vlogs",
+      "published_at": "2026-11-07T13:04:15+00:00",
+      "duration_s": 53.0,
+      "views": 8391219,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 56040,
+      "comments": 34,
+      "shares": 0,
+      "views_per_hour": 167818.6,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/wxmCFlbFvgM"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/wxmCFlbFvgM/hqdefault.jpg",
+      "regions": [
+        "TR"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "uncategorised",
+        "duration_s": 53.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "TR"
+        ],
+        "region_count": 1,
+        "creator": "Parvez Family vlogs",
+        "has_instagram_mirror": false,
+        "caption_words": 51,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 6,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 6,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Diwali",
+          "Celebrate Diwali",
+          "Wishing"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.707,
+        "velocity": 1.327,
+        "acceleration": 0.614,
+        "breadth": 0.0,
+        "engagement_quality": -0.734,
+        "share_ratio": 0.0,
+        "topic_momentum": 3.236,
+        "recency": 2.73
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.12)",
+        "boosted by posted very recently in the window (+1.64)",
+        "boosted by it rode a topic that was spiking globally (+1.46)",
+        "boosted by its view rate was still climbing at last check (+0.80)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"Diwali ke patakhe 😱😂\"",
+        "Topic momentum was rising the same week (Diwali, Celebrate Diwali) — this reel caught a wave rather than starting one, so the format may not transfer to a cold topic.",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "6a49e182ae8194f0",
+      "rank": 3,
+      "vvs": 5.4439,
+      "title": "Duniya ki sabse chotti ladki 👧🏼😳 #reels #minivlog #sejalgaba",
+      "creator": "Sejal Gaba Vlogs",
+      "published_at": "2026-11-04T07:16:29+00:00",
+      "duration_s": 80.0,
+      "views": 63855026,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 1072602,
+      "comments": 2184,
+      "shares": 0,
+      "views_per_hour": 499659.6,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/ZkuaUL40MvM"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/ZkuaUL40MvM/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "none_detected"
+        ],
+        "primary_hook": "none_detected",
+        "topic": "uncategorised",
+        "duration_s": 80.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Sejal Gaba Vlogs",
+        "has_instagram_mirror": false,
+        "caption_words": 9,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 3,
+        "hashtag_bucket": "tags_1_3",
+        "emoji_count": 3,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Duniya"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 2.221,
+        "velocity": 2.14,
+        "acceleration": -0.081,
+        "breadth": 0.0,
+        "engagement_quality": 0.01,
+        "share_ratio": 0.0,
+        "topic_momentum": 0.251,
+        "recency": -0.361
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+3.42)",
+        "boosted by sheer view count (+2.22)",
+        "held back by posted very recently in the window (-0.22)",
+        "boosted by it rode a topic that was spiking globally (+0.11)"
+      ],
+      "why_it_worked": [
+        "80s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "[tentative] a runtime over 60s + 1-3 hashtags → 1.58x more likely to reach the week's top quartile (48 clips, 40% hit rate vs a 25% base rate; 95% CI 27-54%; q=0.076 across 87 tested)",
+        "[tentative] a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + 1-3 hashtags → 1.58x more likely to reach the week's top quartile (48 clips, 40% hit rate vs a 25% base rate; 95% CI 27-54%; q=0.076 across 87 tested)",
+          "lift": 1.5797348484848481,
+          "n": 48,
+          "confidence": "tentative",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "hashtags:tags_1_3"
+          ]
+        },
+        {
+          "rule": "a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)",
+          "lift": 1.3683116883116881,
+          "n": 70,
+          "confidence": "tentative",
+          "attributes": [
+            "caption:caption_short_1_10w",
+            "duration:extended_60s_plus"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "fad1af0d571bc72e",
+      "rank": 4,
+      "vvs": 5.0897,
+      "title": "Diwali wali 🪔Soan Papdi 🍮Mithaai😆😂#shorts #trending #viral #comedy #funny #viral #meghachaube",
+      "creator": "Megha Chaube Shorts",
+      "published_at": "2026-11-06T08:49:52+00:00",
+      "duration_s": 46.0,
+      "views": 9059158,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 93779,
+      "comments": 114,
+      "shares": 0,
+      "views_per_hour": 115784.6,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/m6NH2RoHZiM"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/m6NH2RoHZiM/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 46.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Megha Chaube Shorts",
+        "has_instagram_mirror": false,
+        "caption_words": 11,
+        "caption_len_bucket": "caption_medium_11_30w",
+        "hashtag_count": 7,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 4,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Diwali",
+          "Soan Papdi",
+          "Mithaai"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.764,
+        "velocity": 1.051,
+        "acceleration": 0.614,
+        "breadth": 0.0,
+        "engagement_quality": -0.465,
+        "share_ratio": 0.0,
+        "topic_momentum": 3.236,
+        "recency": 1.269
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.68)",
+        "boosted by it rode a topic that was spiking globally (+1.46)",
+        "boosted by its view rate was still climbing at last check (+0.80)",
+        "boosted by sheer view count (+0.76)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"Diwali wali 🪔Soan Papdi 🍮Mithaai😆😂\"",
+        "Topic momentum was rising the same week (Diwali, Soan Papdi) — this reel caught a wave rather than starting one, so the format may not transfer to a cold topic.",
+        "[strong] an 11-30 word caption + comedy content → 1.15x more likely to reach the week's top quartile (121 clips, 29% hit rate vs a 25% base rate; 95% CI 22-38%; q=0.003 across 87 tested)",
+        "[strong] comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+        "[strong] an 11-30 word caption + an emoji in the caption → 1.11x more likely to reach the week's top quartile (226 clips, 28% hit rate vs a 25% base rate; 95% CI 22-34%; q=0.006 across 87 tested)",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+        "[strong] an 11-30 word caption → 1.03x more likely to reach the week's top quartile (313 clips, 26% hit rate vs a 25% base rate; 95% CI 21-31%; q=0.009 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "an 11-30 word caption + comedy content → 1.15x more likely to reach the week's top quartile (121 clips, 29% hit rate vs a 25% base rate; 95% CI 22-38%; q=0.003 across 87 tested)",
+          "lift": 1.154395191585274,
+          "n": 121,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+          "lift": 1.119671717171717,
+          "n": 360,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "an 11-30 word caption + an emoji in the caption → 1.11x more likely to reach the week's top quartile (226 clips, 28% hit rate vs a 25% base rate; 95% CI 22-34%; q=0.006 across 87 tested)",
+          "lift": 1.1125100563153658,
+          "n": 226,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w",
+            "caption:has_emoji"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        },
+        {
+          "rule": "an 11-30 word caption → 1.03x more likely to reach the week's top quartile (313 clips, 26% hit rate vs a 25% base rate; 95% CI 21-31%; q=0.009 across 87 tested)",
+          "lift": 1.0327911704908508,
+          "n": 313,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "17b592bbbb822bad",
+      "rank": 5,
+      "vvs": 4.7015,
+      "title": "अब हुआ Power का सही इस्तमाल 😜🤪 Comedy Shorts #viral #comedy #shorts #trending #youtubeshorts",
+      "creator": "Keshav Shashi Vlogs",
+      "published_at": "2026-11-06T14:13:33+00:00",
+      "duration_s": 70.0,
+      "views": 18459683,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 319668,
+      "comments": 951,
+      "shares": 0,
+      "views_per_hour": 253403.4,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/aTD43XC6Qp0"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/aTD43XC6Qp0/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 70.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "Keshav Shashi Vlogs",
+        "has_instagram_mirror": false,
+        "caption_words": 188,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 28,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Power",
+          "Comedy Shorts",
+          "Keshav"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 1.295,
+        "velocity": 1.634,
+        "acceleration": -0.0,
+        "breadth": 0.0,
+        "engagement_quality": 0.051,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.346,
+        "recency": 1.511
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.61)",
+        "boosted by sheer view count (+1.30)",
+        "boosted by posted very recently in the window (+0.91)",
+        "held back by it rode a topic that was spiking globally (-0.16)"
+      ],
+      "why_it_worked": [
+        "70s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"अब हुआ Power का सही इस्तमाल 😜🤪 Comedy Shorts\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "28 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators.",
+        "[strong] a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+        "[strong] comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+          "lift": 1.3528505392912171,
+          "n": 118,
+          "confidence": "strong",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+          "lift": 1.119671717171717,
+          "n": 360,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "32e9d35852422c40",
+      "rank": 6,
+      "vvs": 4.6577,
+      "title": "भाई बहन roasting level 📈 😜 Comedy Shorts #viral #shorts #comedy #trending #funny",
+      "creator": "Keshav Shashi Vlogs",
+      "published_at": "2026-11-07T11:56:17+00:00",
+      "duration_s": 45.0,
+      "views": 5796097,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 128784,
+      "comments": 432,
+      "shares": 0,
+      "views_per_hour": 113351.3,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/510vJMeU6aE"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/510vJMeU6aE/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 45.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Keshav Shashi Vlogs",
+        "has_instagram_mirror": false,
+        "caption_words": 187,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 28,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Comedy Shorts",
+          "Keshav",
+          "Keywords"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.431,
+        "velocity": 1.035,
+        "acceleration": 0.614,
+        "breadth": 0.0,
+        "engagement_quality": 0.414,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.346,
+        "recency": 2.661
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.66)",
+        "boosted by posted very recently in the window (+1.60)",
+        "boosted by its view rate was still climbing at last check (+0.80)",
+        "boosted by sheer view count (+0.43)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"भाई बहन roasting level 📈 😜 Comedy Shorts\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "28 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators.",
+        "[strong] comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+          "lift": 1.119671717171717,
+          "n": 360,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "27ab07a0bf23eadc",
+      "rank": 7,
+      "vvs": 4.6481,
+      "title": "Last Words Of Lady Pilot",
+      "creator": "Facts' Mine",
+      "published_at": "2026-11-05T12:30:03+00:00",
+      "duration_s": 63.0,
+      "views": 9857994,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 390733,
+      "comments": 2713,
+      "shares": 0,
+      "views_per_hour": 100008.0,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/wQZPZCY30hQ"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/wQZPZCY30hQ/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "none_detected"
+        ],
+        "primary_hook": "none_detected",
+        "topic": "education",
+        "duration_s": 63.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "Facts' Mine",
+        "has_instagram_mirror": false,
+        "caption_words": 5,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 5,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 0,
+        "has_emoji": false,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Last Words",
+          "Lady Pilot"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.827,
+        "velocity": 0.942,
+        "acceleration": 0.614,
+        "breadth": 0.0,
+        "engagement_quality": 1.727,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.346,
+        "recency": 0.482
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.51)",
+        "boosted by unusually high comments-per-view (+1.38)",
+        "boosted by sheer view count (+0.83)",
+        "boosted by its view rate was still climbing at last check (+0.80)"
+      ],
+      "why_it_worked": [
+        "63s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "4,046 weighted engagements per 100k views — well above typical, meaning people argued about it, not just watched.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[tentative] a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)",
+          "lift": 1.3683116883116881,
+          "n": 70,
+          "confidence": "tentative",
+          "attributes": [
+            "caption:caption_short_1_10w",
+            "duration:extended_60s_plus"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "48ed86fa199d6a87",
+      "rank": 8,
+      "vvs": 4.6416,
+      "title": "Free में पटाखे लिया !🧨😂 #lakhanghotkar #comedy #funny #reels #shorts #youtubeshorts #short #diwali",
+      "creator": "Lakhan Ghotkar",
+      "published_at": "2026-11-07T11:20:30+00:00",
+      "duration_s": 77.0,
+      "views": 9623519,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 81577,
+      "comments": 49,
+      "shares": 0,
+      "views_per_hour": 186033.2,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/3TxENQlXoP0"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/3TxENQlXoP0/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "none_detected"
+        ],
+        "primary_hook": "none_detected",
+        "topic": "comedy",
+        "duration_s": 77.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Lakhan Ghotkar",
+        "has_instagram_mirror": false,
+        "caption_words": 52,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 39,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 0,
+        "has_emoji": false,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Lakhan Ghotkar",
+          "Free"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.809,
+        "velocity": 1.404,
+        "acceleration": 0.499,
+        "breadth": 0.0,
+        "engagement_quality": -0.603,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.346,
+        "recency": 2.626
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.25)",
+        "boosted by posted very recently in the window (+1.58)",
+        "boosted by sheer view count (+0.81)",
+        "boosted by its view rate was still climbing at last check (+0.65)"
+      ],
+      "why_it_worked": [
+        "77s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "39 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators.",
+        "[strong] a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+        "[strong] comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+          "lift": 1.3528505392912171,
+          "n": 118,
+          "confidence": "strong",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+          "lift": 1.119671717171717,
+          "n": 360,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "a1f6f885d423c177",
+      "rank": 9,
+      "vvs": 4.5726,
+      "title": "Momos Vs Saomsa kaun jeetega? 🫨kya banaya maine? #shorts #shivangithenayibahu #viral #vlog #food",
+      "creator": "Shivangi the nayi bahu",
+      "published_at": "2026-11-07T07:52:18+00:00",
+      "duration_s": 39.0,
+      "views": 8427463,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 104641,
+      "comments": 424,
+      "shares": 0,
+      "views_per_hour": 152670.5,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/HlHBy2_jp1I"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/HlHBy2_jp1I/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "question",
+          "stakes",
+          "trend_ride"
+        ],
+        "primary_hook": "question",
+        "topic": "food",
+        "duration_s": 39.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Shivangi the nayi bahu",
+        "has_instagram_mirror": false,
+        "caption_words": 257,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 11,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 3,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Samosa Recipe",
+          "Kashmiri",
+          "Momos"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.71,
+        "velocity": 1.257,
+        "acceleration": 0.614,
+        "breadth": 0.0,
+        "engagement_quality": -0.306,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.346,
+        "recency": 2.423
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.01)",
+        "boosted by posted very recently in the window (+1.45)",
+        "boosted by its view rate was still climbing at last check (+0.80)",
+        "boosted by sheer view count (+0.71)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'question' hook: \"Momos Vs Saomsa kaun jeetega?\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "11 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators."
+      ],
+      "evidence": []
+    },
+    {
+      "cluster_id": "7e0310b9ac28acb7",
+      "rank": 10,
+      "vvs": 4.551,
+      "title": "Middle Class 💔🪔 Gareeb Aur Ameer Diwali 🙏 #shorts #viral #video #reels",
+      "creator": "Jomy Production",
+      "published_at": "2026-11-07T09:35:37+00:00",
+      "duration_s": 119.0,
+      "views": 6717691,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 145801,
+      "comments": 17461,
+      "shares": 0,
+      "views_per_hour": 125615.1,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/damMD0oAbKQ"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/damMD0oAbKQ/hqdefault.jpg",
+      "regions": [
+        "JP"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "uncategorised",
+        "duration_s": 119.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "JP"
+        ],
+        "region_count": 1,
+        "creator": "Jomy Production",
+        "has_instagram_mirror": false,
+        "caption_words": 12,
+        "caption_len_bucket": "caption_medium_11_30w",
+        "hashtag_count": 4,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 3,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Middle Class",
+          "Gareeb Aur Ameer",
+          "Diwali"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.541,
+        "velocity": 1.112,
+        "acceleration": -1.14,
+        "breadth": 0.0,
+        "engagement_quality": 0.928,
+        "share_ratio": 0.0,
+        "topic_momentum": 3.236,
+        "recency": 2.522
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.78)",
+        "boosted by posted very recently in the window (+1.51)",
+        "held back by its view rate was still climbing at last check (-1.48)",
+        "boosted by it rode a topic that was spiking globally (+1.46)"
+      ],
+      "why_it_worked": [
+        "119s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"Middle Class 💔🪔 Gareeb Aur Ameer Diwali 🙏\"",
+        "Topic momentum was rising the same week (Middle Class, Gareeb Aur Ameer) — this reel caught a wave rather than starting one, so the format may not transfer to a cold topic.",
+        "[strong] an 11-30 word caption + a runtime over 60s → 1.36x more likely to reach the week's top quartile (94 clips, 34% hit rate vs a 25% base rate; 95% CI 25-44%; q=0.006 across 87 tested)",
+        "[strong] an 11-30 word caption + an emoji in the caption → 1.11x more likely to reach the week's top quartile (226 clips, 28% hit rate vs a 25% base rate; 95% CI 22-34%; q=0.006 across 87 tested)",
+        "[strong] a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+        "[strong] an 11-30 word caption → 1.03x more likely to reach the week's top quartile (313 clips, 26% hit rate vs a 25% base rate; 95% CI 21-31%; q=0.009 across 87 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "an 11-30 word caption + a runtime over 60s → 1.36x more likely to reach the week's top quartile (94 clips, 34% hit rate vs a 25% base rate; 95% CI 25-44%; q=0.006 across 87 tested)",
+          "lift": 1.3586073500967115,
+          "n": 94,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w",
+            "duration:extended_60s_plus"
+          ]
+        },
+        {
+          "rule": "an 11-30 word caption + an emoji in the caption → 1.11x more likely to reach the week's top quartile (226 clips, 28% hit rate vs a 25% base rate; 95% CI 22-34%; q=0.006 across 87 tested)",
+          "lift": 1.1125100563153658,
+          "n": 226,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w",
+            "caption:has_emoji"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+          "lift": 1.0642424242424242,
+          "n": 570,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        },
+        {
+          "rule": "an 11-30 word caption → 1.03x more likely to reach the week's top quartile (313 clips, 26% hit rate vs a 25% base rate; 95% CI 21-31%; q=0.009 across 87 tested)",
+          "lift": 1.0327911704908508,
+          "n": 313,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w"
+          ]
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "rule": "an 11-30 word caption + a runtime over 60s → 1.36x more likely to reach the week's top quartile (94 clips, 34% hit rate vs a 25% base rate; 95% CI 25-44%; q=0.006 across 87 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "duration:extended_60s_plus"
+      ],
+      "lift": 1.359,
+      "superiority": 0.603,
+      "support": 0.107,
+      "confidence_pct": 34.0,
+      "confidence_ci": [
+        0.253,
+        0.441
+      ],
+      "n": 94,
+      "q_value": 0.0062,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "capitalised words in the hook → 1.06x more likely to reach the week's top quartile (49 clips, 27% hit rate vs a 25% base rate; 95% CI 16-40%; q=0.034 across 87 tested)",
+      "antecedent": [
+        "hook:shouty_caps"
+      ],
+      "lift": 1.059,
+      "superiority": 0.603,
+      "support": 0.056,
+      "confidence_pct": 26.5,
+      "confidence_ci": [
+        0.162,
+        0.403
+      ],
+      "n": 49,
+      "q_value": 0.0337,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "moderate"
+    },
+    {
+      "rule": "an 11-30 word caption + comedy content → 1.15x more likely to reach the week's top quartile (121 clips, 29% hit rate vs a 25% base rate; 95% CI 22-38%; q=0.003 across 87 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "topic:comedy"
+      ],
+      "lift": 1.154,
+      "superiority": 0.602,
+      "support": 0.138,
+      "confidence_pct": 28.9,
+      "confidence_ci": [
+        0.216,
+        0.376
+      ],
+      "n": 121,
+      "q_value": 0.0032,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "an 11-30 word caption + a secondary trend ride angle → 1.26x more likely to reach the week's top quartile (54 clips, 31% hit rate vs a 25% base rate; 95% CI 21-45%; q=0.034 across 87 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "hook_secondary:trend_ride"
+      ],
+      "lift": 1.256,
+      "superiority": 0.601,
+      "support": 0.062,
+      "confidence_pct": 31.5,
+      "confidence_ci": [
+        0.207,
+        0.447
+      ],
+      "n": 54,
+      "q_value": 0.0337,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "moderate"
+    },
+    {
+      "rule": "a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+      "antecedent": [
+        "duration:extended_60s_plus",
+        "topic:comedy"
+      ],
+      "lift": 1.353,
+      "superiority": 0.597,
+      "support": 0.134,
+      "confidence_pct": 33.9,
+      "confidence_ci": [
+        0.26,
+        0.428
+      ],
+      "n": 118,
+      "q_value": 0.006,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "1-3 hashtags + comedy content → 1.64x more likely to reach the week's top quartile (56 clips, 41% hit rate vs a 25% base rate; 95% CI 29-54%; q=0.034 across 87 tested)",
+      "antecedent": [
+        "hashtags:tags_1_3",
+        "topic:comedy"
+      ],
+      "lift": 1.639,
+      "superiority": 0.597,
+      "support": 0.064,
+      "confidence_pct": 41.1,
+      "confidence_ci": [
+        0.292,
+        0.541
+      ],
+      "n": 56,
+      "q_value": 0.0337,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "moderate"
+    },
+    {
+      "rule": "4-10 hashtags + a secondary trend ride angle → 1.23x more likely to reach the week's top quartile (65 clips, 31% hit rate vs a 25% base rate; 95% CI 21-43%; q=0.034 across 87 tested)",
+      "antecedent": [
+        "hashtags:tags_4_10",
+        "hook_secondary:trend_ride"
+      ],
+      "lift": 1.228,
+      "superiority": 0.591,
+      "support": 0.074,
+      "confidence_pct": 30.8,
+      "confidence_ci": [
+        0.209,
+        0.428
+      ],
+      "n": 65,
+      "q_value": 0.0337,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "moderate"
+    },
+    {
+      "rule": "a trend ride hook → 1.06x more likely to reach the week's top quartile (570 clips, 27% hit rate vs a 25% base rate; 95% CI 23-30%; q=0.000 across 87 tested)",
+      "antecedent": [
+        "hook:trend_ride"
+      ],
+      "lift": 1.064,
+      "superiority": 0.59,
+      "support": 0.649,
+      "confidence_pct": 26.7,
+      "confidence_ci": [
+        0.232,
+        0.304
+      ],
+      "n": 570,
+      "q_value": 0.0005,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "a runtime over 60s + 1-3 hashtags → 1.58x more likely to reach the week's top quartile (48 clips, 40% hit rate vs a 25% base rate; 95% CI 27-54%; q=0.076 across 87 tested)",
+      "antecedent": [
+        "duration:extended_60s_plus",
+        "hashtags:tags_1_3"
+      ],
+      "lift": 1.58,
+      "superiority": 0.582,
+      "support": 0.055,
+      "confidence_pct": 39.6,
+      "confidence_ci": [
+        0.27,
+        0.537
+      ],
+      "n": 48,
+      "q_value": 0.0759,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "tentative"
+    },
+    {
+      "rule": "comedy content → 1.12x more likely to reach the week's top quartile (360 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 87 tested)",
+      "antecedent": [
+        "topic:comedy"
+      ],
+      "lift": 1.12,
+      "superiority": 0.58,
+      "support": 0.41,
+      "confidence_pct": 28.1,
+      "confidence_ci": [
+        0.237,
+        0.329
+      ],
+      "n": 360,
+      "q_value": 0.0008,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "an 11-30 word caption + an emoji in the caption → 1.11x more likely to reach the week's top quartile (226 clips, 28% hit rate vs a 25% base rate; 95% CI 22-34%; q=0.006 across 87 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "caption:has_emoji"
+      ],
+      "lift": 1.113,
+      "superiority": 0.574,
+      "support": 0.257,
+      "confidence_pct": 27.9,
+      "confidence_ci": [
+        0.224,
+        0.341
+      ],
+      "n": 226,
+      "q_value": 0.006,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    },
+    {
+      "rule": "a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)",
+      "antecedent": [
+        "caption:caption_short_1_10w",
+        "duration:extended_60s_plus"
+      ],
+      "lift": 1.368,
+      "superiority": 0.574,
+      "support": 0.08,
+      "confidence_pct": 34.3,
+      "confidence_ci": [
+        0.242,
+        0.46
+      ],
+      "n": 70,
+      "q_value": 0.0626,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "tentative"
+    },
+    {
+      "rule": "an 11-30 word caption → 1.03x more likely to reach the week's top quartile (313 clips, 26% hit rate vs a 25% base rate; 95% CI 21-31%; q=0.009 across 87 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w"
+      ],
+      "lift": 1.033,
+      "superiority": 0.561,
+      "support": 0.356,
+      "confidence_pct": 25.9,
+      "confidence_ci": [
+        0.213,
+        0.31
+      ],
+      "n": 313,
+      "q_value": 0.0089,
+      "tested": 87,
+      "weeks_pooled": 4,
+      "pool_size": 878,
+      "strength": "strong"
+    }
+  ],
+  "mining": {
+    "clips_in_pool": 878,
+    "weeks_pooled": 4,
+    "hypotheses_tested": 87,
+    "fdr_level": 0.1,
+    "note": "Rules are Fisher/rank tested and Benjamini-Hochberg corrected at a 10% false discovery rate. Statistical power depends on pool size: measured recall of a real 2x effect was 16% at 200 clips, 76% at 800, and 96% at 1200. Few or no rules usually means not enough history yet, not that nothing is true."
+  },
+  "recommendations": [
+    {
+      "recommendation": "Use just 1-3 hashtags (in comedy content).",
+      "evidence": "1-3 hashtags + comedy content → 1.64x more likely to reach the week's top quartile (56 clips, 41% hit rate vs a 25% base rate; 95% CI 29-54%; q=0.034 across 87 tested)",
+      "lift": 1.64,
+      "sample_size": 56,
+      "confidence": "moderate",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Go past 60 seconds, and use just 1-3 hashtags.",
+      "evidence": "a runtime over 60s + 1-3 hashtags → 1.58x more likely to reach the week's top quartile (48 clips, 40% hit rate vs a 25% base rate; 95% CI 27-54%; q=0.076 across 87 tested)",
+      "lift": 1.58,
+      "sample_size": 48,
+      "confidence": "tentative",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Go past 60 seconds, and keep the caption under 10 words.",
+      "evidence": "a caption under 10 words + a runtime over 60s → 1.37x more likely to reach the week's top quartile (70 clips, 34% hit rate vs a 25% base rate; 95% CI 24-46%; q=0.063 across 87 tested)",
+      "lift": 1.37,
+      "sample_size": 70,
+      "confidence": "tentative",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Go past 60 seconds, and write an 11-30 word caption.",
+      "evidence": "an 11-30 word caption + a runtime over 60s → 1.36x more likely to reach the week's top quartile (94 clips, 34% hit rate vs a 25% base rate; 95% CI 25-44%; q=0.006 across 87 tested)",
+      "lift": 1.36,
+      "sample_size": 94,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Go past 60 seconds (in comedy content).",
+      "evidence": "a runtime over 60s + comedy content → 1.35x more likely to reach the week's top quartile (118 clips, 34% hit rate vs a 25% base rate; 95% CI 26-43%; q=0.006 across 87 tested)",
+      "lift": 1.35,
+      "sample_size": 118,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Layer in a trend ride angle as well, and write an 11-30 word caption.",
+      "evidence": "an 11-30 word caption + a secondary trend ride angle → 1.26x more likely to reach the week's top quartile (54 clips, 31% hit rate vs a 25% base rate; 95% CI 21-45%; q=0.034 across 87 tested)",
+      "lift": 1.26,
+      "sample_size": 54,
+      "confidence": "moderate",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Layer in a trend ride angle as well, and use 4-10 hashtags.",
+      "evidence": "4-10 hashtags + a secondary trend ride angle → 1.23x more likely to reach the week's top quartile (65 clips, 31% hit rate vs a 25% base rate; 95% CI 21-43%; q=0.034 across 87 tested)",
+      "lift": 1.23,
+      "sample_size": 65,
+      "confidence": "moderate",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Write an 11-30 word caption (in comedy content).",
+      "evidence": "an 11-30 word caption + comedy content → 1.15x more likely to reach the week's top quartile (121 clips, 29% hit rate vs a 25% base rate; 95% CI 22-38%; q=0.003 across 87 tested)",
+      "lift": 1.15,
+      "sample_size": 121,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    }
+  ],
+  "benchmark": {
+    "available": false,
+    "reason": "No Instagram Graph API data. Set IG_ACCESS_TOKEN and IG_USER_ID."
+  }
+}
