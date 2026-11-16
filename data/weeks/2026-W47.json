@@ -1,0 +1,1423 @@
+{
+  "generated_at": "2026-11-16T14:40:28.773199+00:00",
+  "week": "2026-W47",
+  "methodology": {
+    "headline": "Estimated ranking. Reels are discovered natively on Instagram via Hashtag Search and Business Discovery, and supplemented with YouTube Shorts cross-posts where a view count is only available there. Rows are ranked on whichever metric Instagram actually publishes for them — views, or likes and comments — with each basis standardised against its own cohort.",
+    "not_claimed": "This is not Meta's internal ranking and does not reproduce it. No Instagram scraping is performed, and no view count is ever estimated from likes.",
+    "sources": [
+      "Instagram Hashtag Search (Graph API)",
+      "Instagram Business Discovery (Graph API)",
+      "Instagram Graph API (own account)",
+      "Instagram oEmbed (tokenless)",
+      "YouTube Data API v3",
+      "Reddit API",
+      "Wikimedia Pageviews API"
+    ]
+  },
+  "stats": {
+    "candidates": 304,
+    "clusters": 273,
+    "with_view_counts": 273,
+    "instagram_permalinks": 0,
+    "platforms": [
+      "youtube"
+    ]
+  },
+  "reach": {
+    "verdict": "unrated",
+    "anchored": false,
+    "best_tier": "unrated",
+    "best_scale": 9696985.0,
+    "tiers": {
+      "unrated": 10
+    },
+    "headline": "No stored history to compare against, so these results cannot be placed on a scale. 10 of 10 clear a basic floor of 5,000."
+  },
+  "top": [
+    {
+      "cluster_id": "985056af4cfbc103",
+      "rank": 1,
+      "vvs": 6.6482,
+      "title": "heart touching  moment || sad🥲😭#sad #viralvideo #viral #shortsfeed #shorts",
+      "creator": "@Asnu-edit26",
+      "published_at": "2026-11-15T17:03:56+00:00",
+      "duration_s": 11.0,
+      "views": 8450251,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 91419,
+      "comments": 1321,
+      "shares": 0,
+      "views_per_hour": 391059.9,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/zxWcIWZcJF0"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/zxWcIWZcJF0/hqdefault.jpg",
+      "regions": [
+        "BR"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "uncategorised",
+        "duration_s": 11.0,
+        "duration_bucket": "short_7_15s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "BR"
+        ],
+        "region_count": 1,
+        "creator": "@Asnu-edit26",
+        "has_instagram_mirror": false,
+        "caption_words": 9,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 5,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "viralvideo",
+          "shortsfeed",
+          "heart"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.905,
+        "velocity": 1.97,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": -0.381,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 3.5
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+3.15)",
+        "boosted by posted very recently in the window (+2.10)",
+        "boosted by sheer view count (+0.90)",
+        "boosted by its view rate was still climbing at last check (+0.83)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"heart touching  moment || sad🥲😭\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "81d380ff8600f03e",
+      "rank": 2,
+      "vvs": 6.2472,
+      "title": "💯🤯Diwali முறுக்கு 🤣தருணங்கள் 😂 #shorts #comedy #diwali #viral",
+      "creator": "Rajkzr ",
+      "published_at": "2026-11-15T02:34:32+00:00",
+      "duration_s": 113.0,
+      "views": 4786157,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 200256,
+      "comments": 1070,
+      "shares": 0,
+      "views_per_hour": 132584.8,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/78KgPfXkAOU"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/78KgPfXkAOU/hqdefault.jpg",
+      "regions": [
+        "GB"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 113.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "GB"
+        ],
+        "region_count": 1,
+        "creator": "Rajkzr ",
+        "has_instagram_mirror": false,
+        "caption_words": 8,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 4,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 4,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Diwali"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.508,
+        "velocity": 1.241,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 1.639,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 2.743
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.99)",
+        "boosted by posted very recently in the window (+1.65)",
+        "boosted by unusually high comments-per-view (+1.31)",
+        "boosted by its view rate was still climbing at last check (+0.83)"
+      ],
+      "why_it_worked": [
+        "113s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"💯🤯Diwali முறுக்கு 🤣தருணங்கள் 😂\"",
+        "4,251 weighted engagements per 100k views — well above typical, meaning people argued about it, not just watched.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+        "[tentative] a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+        "[strong] comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+          "lift": 1.5537190082644627,
+          "n": 121,
+          "confidence": "strong",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+          "lift": 1.35,
+          "n": 80,
+          "confidence": "tentative",
+          "attributes": [
+            "caption:caption_short_1_10w",
+            "duration:extended_60s_plus"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+          "lift": 1.138121546961326,
+          "n": 362,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "f26e9b5bf371c6c5",
+      "rank": 3,
+      "vvs": 6.0132,
+      "title": "Bihari Family Mein Non-Bihari Bahu🤣 #comedy #छठ #funny #reels #viral #god #ytshorts #laugh #bihar",
+      "creator": "Dolly Pathak",
+      "published_at": "2026-11-15T01:30:38+00:00",
+      "duration_s": 64.0,
+      "views": 9261782,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 200188,
+      "comments": 988,
+      "shares": 0,
+      "views_per_hour": 249222.2,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/TkW4LqFpjI0"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/TkW4LqFpjI0/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 64.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "Dolly Pathak",
+        "has_instagram_mirror": false,
+        "caption_words": 7,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 0,
+        "hashtag_bucket": "tags_0",
+        "emoji_count": 0,
+        "has_emoji": false,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Bihari Family Mein",
+          "Non",
+          "Bihari Bahu"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.969,
+        "velocity": 1.666,
+        "acceleration": 0.428,
+        "breadth": 0.0,
+        "engagement_quality": 0.308,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 2.684
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.67)",
+        "boosted by posted very recently in the window (+1.61)",
+        "boosted by sheer view count (+0.97)",
+        "boosted by its view rate was still climbing at last check (+0.56)"
+      ],
+      "why_it_worked": [
+        "64s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"Bihari Family Mein Non-Bihari Bahu🤣\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "Zero hashtags — distribution came from the ranker, not from tags.",
+        "[strong] a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+        "[tentative] a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+        "[strong] comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+          "lift": 1.5537190082644627,
+          "n": 121,
+          "confidence": "strong",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+          "lift": 1.35,
+          "n": 80,
+          "confidence": "tentative",
+          "attributes": [
+            "caption:caption_short_1_10w",
+            "duration:extended_60s_plus"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+          "lift": 1.138121546961326,
+          "n": 362,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "6c50d50f41dbbdd1",
+      "rank": 4,
+      "vvs": 5.5006,
+      "title": "बहू का सुनहरा मौका 😂🤣 Comedy Shorts #viral #comedy #funny #trending #shorts",
+      "creator": "Keshav Shashi Vlogs",
+      "published_at": "2026-11-14T08:22:32+00:00",
+      "duration_s": 124.0,
+      "views": 9696985,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 220931,
+      "comments": 837,
+      "shares": 0,
+      "views_per_hour": 178587.2,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/j43zFolYSKU"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/j43zFolYSKU/hqdefault.jpg",
+      "regions": [
+        "IN"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 124.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "IN"
+        ],
+        "region_count": 1,
+        "creator": "Keshav Shashi Vlogs",
+        "has_instagram_mirror": false,
+        "caption_words": 186,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 28,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Comedy Shorts",
+          "Keshav",
+          "Keywords"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 1.001,
+        "velocity": 1.442,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 0.38,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 1.822
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.31)",
+        "boosted by posted very recently in the window (+1.09)",
+        "boosted by sheer view count (+1.00)",
+        "boosted by its view rate was still climbing at last check (+0.83)"
+      ],
+      "why_it_worked": [
+        "124s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"बहू का सुनहरा मौका 😂🤣 Comedy Shorts\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "28 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators.",
+        "[strong] a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+        "[strong] comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+          "lift": 1.5537190082644627,
+          "n": 121,
+          "confidence": "strong",
+          "attributes": [
+            "duration:extended_60s_plus",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+          "lift": 1.138121546961326,
+          "n": 362,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "bd2a1967b607205d",
+      "rank": 5,
+      "vvs": 5.4117,
+      "title": "Mistake 😂💀 #shorts #shortvideo #funny #comedy #ytshorts #youtubeshorts #reels #viral #fyp #foryou",
+      "creator": "Aaryan Kelvin",
+      "published_at": "2026-11-15T12:41:43+00:00",
+      "duration_s": 21.0,
+      "views": 2130074,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 83227,
+      "comments": 847,
+      "shares": 0,
+      "views_per_hour": 81995.2,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/rEuq-HQL9-A"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/rEuq-HQL9-A/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "comedy",
+        "duration_s": 21.0,
+        "duration_bucket": "mid_15_30s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "Aaryan Kelvin",
+        "has_instagram_mirror": false,
+        "caption_words": 12,
+        "caption_len_bucket": "caption_medium_11_30w",
+        "hashtag_count": 10,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Mistake"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": -0.056,
+        "velocity": 0.917,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 1.493,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 3.349
+      },
+      "score_explanation": [
+        "boosted by posted very recently in the window (+2.01)",
+        "boosted by views accumulated per hour since posting (+1.47)",
+        "boosted by unusually high comments-per-view (+1.19)",
+        "boosted by its view rate was still climbing at last check (+0.83)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"Mistake 😂💀\"",
+        "4,027 weighted engagements per 100k views — well above typical, meaning people argued about it, not just watched.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] an 11-30 word caption + comedy content → 1.24x more likely to reach the week's top quartile (116 clips, 31% hit rate vs a 25% base rate; 95% CI 23-40%; q=0.001 across 89 tested)",
+        "[strong] comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+        "[strong] an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "an 11-30 word caption + comedy content → 1.24x more likely to reach the week's top quartile (116 clips, 31% hit rate vs a 25% base rate; 95% CI 23-40%; q=0.001 across 89 tested)",
+          "lift": 1.2413793103448276,
+          "n": 116,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w",
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+          "lift": 1.138121546961326,
+          "n": 362,
+          "confidence": "strong",
+          "attributes": [
+            "topic:comedy"
+          ]
+        },
+        {
+          "rule": "an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+          "lift": 1.1111111111111112,
+          "n": 306,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "92d4dc3dbd81e84c",
+      "rank": 6,
+      "vvs": 5.228,
+      "title": "सास बहू की शार्ट स्टोरी #ytshorts #reels #faimelybond #youtubeshorts #SadhanaSI",
+      "creator": "SadhanaSI",
+      "published_at": "2026-11-14T10:07:54+00:00",
+      "duration_s": 179.0,
+      "views": 5277387,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 194520,
+      "comments": 305,
+      "shares": 0,
+      "views_per_hour": 100442.0,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/An6eFHc45Gw"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/dc0Z0W6lPbc/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "none_detected"
+        ],
+        "primary_hook": "none_detected",
+        "topic": "music_dance",
+        "duration_s": 179.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "SadhanaSI",
+        "has_instagram_mirror": false,
+        "caption_words": 49,
+        "caption_len_bucket": "caption_long_30w_plus",
+        "hashtag_count": 43,
+        "hashtag_bucket": "tags_11_plus",
+        "emoji_count": 0,
+        "has_emoji": false,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "ytshorts",
+          "faimelybond",
+          "youtubeshorts"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.576,
+        "velocity": 1.054,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 1.284,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 1.902
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.69)",
+        "boosted by posted very recently in the window (+1.14)",
+        "boosted by unusually high comments-per-view (+1.03)",
+        "boosted by its view rate was still climbing at last check (+0.83)"
+      ],
+      "why_it_worked": [
+        "179s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "43 hashtags — heavy tagging, which correlates with aggregator accounts more than with original creators."
+      ],
+      "evidence": []
+    },
+    {
+      "cluster_id": "be50270987531341",
+      "rank": 7,
+      "vvs": 5.1695,
+      "title": "MINUM TEH SUSU 🥛🔫 #asmr #mukbang #videolucu #drink #milk #minuman #shorts #hiburan #viral",
+      "creator": "HANAYO",
+      "published_at": "2026-11-13T11:02:49+00:00",
+      "duration_s": 53.0,
+      "views": 9492762,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 383842,
+      "comments": 213,
+      "shares": 0,
+      "views_per_hour": 125521.4,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/GiBTVA2uoPg"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/GiBTVA2uoPg/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "satisfying",
+        "duration_s": 53.0,
+        "duration_bucket": "long_30_60s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "HANAYO",
+        "has_instagram_mirror": false,
+        "caption_words": 13,
+        "caption_len_bucket": "caption_medium_11_30w",
+        "hashtag_count": 9,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 3,
+        "entities": [
+          "asmr",
+          "mukbang",
+          "videolucu"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.986,
+        "velocity": 1.204,
+        "acceleration": 0.387,
+        "breadth": 0.0,
+        "engagement_quality": 1.509,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 0.968
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+1.93)",
+        "boosted by unusually high comments-per-view (+1.21)",
+        "boosted by sheer view count (+0.99)",
+        "boosted by posted very recently in the window (+0.58)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"MINUM TEH SUSU 🥛🔫\"",
+        "4,050 weighted engagements per 100k views — well above typical, meaning people argued about it, not just watched.",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+          "lift": 1.1111111111111112,
+          "n": 306,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "63f4667727a93adf",
+      "rank": 8,
+      "vvs": 4.9939,
+      "title": "Saas Bahu Masti 😜❤️ Chhath Puja 🙏🏻 #shorts #viral #reels",
+      "creator": "Ruk Jao",
+      "published_at": "2026-11-15T11:15:20+00:00",
+      "duration_s": 146.0,
+      "views": 3502024,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 60325,
+      "comments": 91,
+      "shares": 0,
+      "views_per_hour": 127728.4,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/sYv64XYagXE"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/sYv64XYagXE/hqdefault.jpg",
+      "regions": [
+        "EG"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "uncategorised",
+        "duration_s": 146.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "EG"
+        ],
+        "region_count": 1,
+        "creator": "Ruk Jao",
+        "has_instagram_mirror": false,
+        "caption_words": 10,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 3,
+        "hashtag_bucket": "tags_1_3",
+        "emoji_count": 4,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Saas Bahu Masti",
+          "Chhath Puja"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.29,
+        "velocity": 1.216,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 0.008,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 3.258
+      },
+      "score_explanation": [
+        "boosted by posted very recently in the window (+1.96)",
+        "boosted by views accumulated per hour since posting (+1.95)",
+        "boosted by its view rate was still climbing at last check (+0.83)",
+        "boosted by sheer view count (+0.29)"
+      ],
+      "why_it_worked": [
+        "146s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"Saas Bahu Masti 😜❤️ Chhath Puja 🙏🏻\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[tentative] a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+          "lift": 1.35,
+          "n": 80,
+          "confidence": "tentative",
+          "attributes": [
+            "caption:caption_short_1_10w",
+            "duration:extended_60s_plus"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "35428192163a507e",
+      "rank": 9,
+      "vvs": 4.8563,
+      "title": "LAGI MERUJAK 😍❤️ #kampungkeramatofficial #jogetseru #dance #viral #shorts",
+      "creator": "KampungKeramat Official",
+      "published_at": "2026-11-15T09:03:31+00:00",
+      "duration_s": 11.0,
+      "views": 5130748,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 20710,
+      "comments": 1163,
+      "shares": 0,
+      "views_per_hour": 173245.2,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/xqdXVI6gFqw"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/xqdXVI6gFqw/hqdefault.jpg",
+      "regions": [
+        "BR"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "music_dance",
+        "duration_s": 11.0,
+        "duration_bucket": "short_7_15s",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "BR"
+        ],
+        "region_count": 1,
+        "creator": "KampungKeramat Official",
+        "has_instagram_mirror": false,
+        "caption_words": 8,
+        "caption_len_bucket": "caption_short_1_10w",
+        "hashtag_count": 5,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 2,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 2,
+        "entities": [
+          "kampungkeramatofficial",
+          "jogetseru",
+          "dance"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.557,
+        "velocity": 1.421,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": -0.806,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 3.123
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.27)",
+        "boosted by posted very recently in the window (+1.87)",
+        "boosted by its view rate was still climbing at last check (+0.83)",
+        "held back by unusually high comments-per-view (-0.64)"
+      ],
+      "why_it_worked": [
+        "Opens on a 'trend ride' hook: \"LAGI MERUJAK 😍❤️\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "6d558aebf7c76ac9",
+      "rank": 10,
+      "vvs": 4.8464,
+      "title": "Chhath Puja Ki Taiyaari ❤️ #neetubisht #lakhneet #trending #viral #chhathpuja #festival",
+      "creator": "Neetu Bisht",
+      "published_at": "2026-11-14T12:30:10+00:00",
+      "duration_s": 96.0,
+      "views": 6831031,
+      "measurement_basis": "views",
+      "reach_tier": "unrated",
+      "reach_percentile": null,
+      "instagram_native": false,
+      "discovered_via": null,
+      "likes": 123444,
+      "comments": 1085,
+      "shares": 0,
+      "views_per_hour": 136157.0,
+      "platforms": [
+        "youtube"
+      ],
+      "breadth": 1,
+      "urls": {
+        "youtube": "https://www.youtube.com/shorts/SLGtSmiqwZ4"
+      },
+      "instagram_url": null,
+      "instagram_embed": null,
+      "thumbnail": "https://i.ytimg.com/vi/SLGtSmiqwZ4/hqdefault.jpg",
+      "regions": [
+        "TR"
+      ],
+      "tags": {
+        "hooks": [
+          "trend_ride"
+        ],
+        "primary_hook": "trend_ride",
+        "topic": "uncategorised",
+        "duration_s": 96.0,
+        "duration_bucket": "extended_60s_plus",
+        "platforms": [
+          "youtube"
+        ],
+        "regions": [
+          "TR"
+        ],
+        "region_count": 1,
+        "creator": "Neetu Bisht",
+        "has_instagram_mirror": false,
+        "caption_words": 11,
+        "caption_len_bucket": "caption_medium_11_30w",
+        "hashtag_count": 6,
+        "hashtag_bucket": "tags_4_10",
+        "emoji_count": 1,
+        "has_emoji": true,
+        "has_question": false,
+        "has_cta": false,
+        "ctas": [],
+        "has_number_in_hook": false,
+        "all_caps_words": 0,
+        "entities": [
+          "Chhath Puja",
+          "Taiyaari"
+        ],
+        "reach_tier": "unrated",
+        "reach_percentile": null
+      },
+      "score_breakdown": {
+        "magnitude": 0.756,
+        "velocity": 1.259,
+        "acceleration": 0.639,
+        "breadth": 0.0,
+        "engagement_quality": 0.089,
+        "share_ratio": 0.0,
+        "topic_momentum": -0.076,
+        "recency": 2.014
+      },
+      "score_explanation": [
+        "boosted by views accumulated per hour since posting (+2.01)",
+        "boosted by posted very recently in the window (+1.21)",
+        "boosted by its view rate was still climbing at last check (+0.83)",
+        "boosted by sheer view count (+0.76)"
+      ],
+      "why_it_worked": [
+        "96s runtime — long for short-form, so it held attention on content rather than on loop mechanics.",
+        "Opens on a 'trend ride' hook: \"Chhath Puja Ki Taiyaari ❤️\"",
+        "No detectable topic spike behind it — the performance came from execution, which is the more repeatable kind.",
+        "[strong] an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+        "[strong] a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)"
+      ],
+      "evidence": [
+        {
+          "rule": "an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+          "lift": 1.1111111111111112,
+          "n": 306,
+          "confidence": "strong",
+          "attributes": [
+            "caption:caption_medium_11_30w"
+          ]
+        },
+        {
+          "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+          "lift": 1.0850722311396468,
+          "n": 623,
+          "confidence": "strong",
+          "attributes": [
+            "hook:trend_ride"
+          ]
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "rule": "a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+      "antecedent": [
+        "duration:extended_60s_plus",
+        "topic:comedy"
+      ],
+      "lift": 1.554,
+      "superiority": 0.62,
+      "support": 0.131,
+      "confidence_pct": 38.8,
+      "confidence_ci": [
+        0.306,
+        0.477
+      ],
+      "n": 121,
+      "q_value": 0.0003,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "strong"
+    },
+    {
+      "rule": "an 11-30 word caption + a secondary trend ride angle → 1.36x more likely to reach the week's top quartile (47 clips, 34% hit rate vs a 25% base rate; 95% CI 22-48%; q=0.025 across 89 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "hook_secondary:trend_ride"
+      ],
+      "lift": 1.362,
+      "superiority": 0.613,
+      "support": 0.051,
+      "confidence_pct": 34.0,
+      "confidence_ci": [
+        0.222,
+        0.483
+      ],
+      "n": 47,
+      "q_value": 0.0248,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "moderate"
+    },
+    {
+      "rule": "an 11-30 word caption + comedy content → 1.24x more likely to reach the week's top quartile (116 clips, 31% hit rate vs a 25% base rate; 95% CI 23-40%; q=0.001 across 89 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w",
+        "topic:comedy"
+      ],
+      "lift": 1.241,
+      "superiority": 0.612,
+      "support": 0.126,
+      "confidence_pct": 31.0,
+      "confidence_ci": [
+        0.233,
+        0.399
+      ],
+      "n": 116,
+      "q_value": 0.0009,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "strong"
+    },
+    {
+      "rule": "4-10 hashtags + a secondary trend ride angle → 1.40x more likely to reach the week's top quartile (60 clips, 35% hit rate vs a 25% base rate; 95% CI 24-48%; q=0.034 across 89 tested)",
+      "antecedent": [
+        "hashtags:tags_4_10",
+        "hook_secondary:trend_ride"
+      ],
+      "lift": 1.4,
+      "superiority": 0.596,
+      "support": 0.065,
+      "confidence_pct": 35.0,
+      "confidence_ci": [
+        0.242,
+        0.476
+      ],
+      "n": 60,
+      "q_value": 0.0341,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "moderate"
+    },
+    {
+      "rule": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+      "antecedent": [
+        "hook:trend_ride"
+      ],
+      "lift": 1.085,
+      "superiority": 0.589,
+      "support": 0.674,
+      "confidence_pct": 27.1,
+      "confidence_ci": [
+        0.238,
+        0.308
+      ],
+      "n": 623,
+      "q_value": 0.0003,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "strong"
+    },
+    {
+      "rule": "an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+      "antecedent": [
+        "caption:caption_medium_11_30w"
+      ],
+      "lift": 1.111,
+      "superiority": 0.587,
+      "support": 0.331,
+      "confidence_pct": 27.8,
+      "confidence_ci": [
+        0.231,
+        0.33
+      ],
+      "n": 306,
+      "q_value": 0.0003,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "strong"
+    },
+    {
+      "rule": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+      "antecedent": [
+        "topic:comedy"
+      ],
+      "lift": 1.138,
+      "superiority": 0.575,
+      "support": 0.392,
+      "confidence_pct": 28.5,
+      "confidence_ci": [
+        0.241,
+        0.333
+      ],
+      "n": 362,
+      "q_value": 0.0009,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "strong"
+    },
+    {
+      "rule": "a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+      "antecedent": [
+        "caption:caption_short_1_10w",
+        "duration:extended_60s_plus"
+      ],
+      "lift": 1.35,
+      "superiority": 0.568,
+      "support": 0.087,
+      "confidence_pct": 33.8,
+      "confidence_ci": [
+        0.243,
+        0.446
+      ],
+      "n": 80,
+      "q_value": 0.0759,
+      "tested": 89,
+      "weeks_pooled": 4,
+      "pool_size": 924,
+      "strength": "tentative"
+    }
+  ],
+  "mining": {
+    "clips_in_pool": 924,
+    "weeks_pooled": 4,
+    "hypotheses_tested": 89,
+    "fdr_level": 0.1,
+    "note": "Rules are Fisher/rank tested and Benjamini-Hochberg corrected at a 10% false discovery rate. Statistical power depends on pool size: measured recall of a real 2x effect was 16% at 200 clips, 76% at 800, and 96% at 1200. Few or no rules usually means not enough history yet, not that nothing is true."
+  },
+  "recommendations": [
+    {
+      "recommendation": "Go past 60 seconds (in comedy content).",
+      "evidence": "a runtime over 60s + comedy content → 1.55x more likely to reach the week's top quartile (121 clips, 39% hit rate vs a 25% base rate; 95% CI 31-48%; q=0.000 across 89 tested)",
+      "lift": 1.55,
+      "sample_size": 121,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Layer in a trend ride angle as well, and use 4-10 hashtags.",
+      "evidence": "4-10 hashtags + a secondary trend ride angle → 1.40x more likely to reach the week's top quartile (60 clips, 35% hit rate vs a 25% base rate; 95% CI 24-48%; q=0.034 across 89 tested)",
+      "lift": 1.4,
+      "sample_size": 60,
+      "confidence": "moderate",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Layer in a trend ride angle as well, and write an 11-30 word caption.",
+      "evidence": "an 11-30 word caption + a secondary trend ride angle → 1.36x more likely to reach the week's top quartile (47 clips, 34% hit rate vs a 25% base rate; 95% CI 22-48%; q=0.025 across 89 tested)",
+      "lift": 1.36,
+      "sample_size": 47,
+      "confidence": "moderate",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Go past 60 seconds, and keep the caption under 10 words.",
+      "evidence": "a caption under 10 words + a runtime over 60s → 1.35x more likely to reach the week's top quartile (80 clips, 34% hit rate vs a 25% base rate; 95% CI 24-45%; q=0.076 across 89 tested)",
+      "lift": 1.35,
+      "sample_size": 80,
+      "confidence": "tentative",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Write an 11-30 word caption (in comedy content).",
+      "evidence": "an 11-30 word caption + comedy content → 1.24x more likely to reach the week's top quartile (116 clips, 31% hit rate vs a 25% base rate; 95% CI 23-40%; q=0.001 across 89 tested)",
+      "lift": 1.24,
+      "sample_size": 116,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "No actionable instruction in this rule.",
+      "evidence": "comedy content → 1.14x more likely to reach the week's top quartile (362 clips, 28% hit rate vs a 25% base rate; 95% CI 24-33%; q=0.001 across 89 tested)",
+      "lift": 1.14,
+      "sample_size": 362,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Write an 11-30 word caption.",
+      "evidence": "an 11-30 word caption → 1.11x more likely to reach the week's top quartile (306 clips, 28% hit rate vs a 25% base rate; 95% CI 23-33%; q=0.000 across 89 tested)",
+      "lift": 1.11,
+      "sample_size": 306,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    },
+    {
+      "recommendation": "Open on a trend ride hook.",
+      "evidence": "a trend ride hook → 1.09x more likely to reach the week's top quartile (623 clips, 27% hit rate vs a 25% base rate; 95% CI 24-31%; q=0.000 across 89 tested)",
+      "lift": 1.09,
+      "sample_size": 623,
+      "confidence": "strong",
+      "scoped_to_niche": false
+    }
+  ],
+  "benchmark": {
+    "available": false,
+    "reason": "No Instagram Graph API data. Set IG_ACCESS_TOKEN and IG_USER_ID."
+  }
+}
